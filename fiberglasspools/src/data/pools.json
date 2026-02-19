@@ -1,0 +1,76 @@
+{
+  "splash": [
+    {
+      "name": "Minnesota",
+      "size": "2.1m x 3.1m",
+      "depth": "1.3m",
+      "price": "R15 900",
+      "image": "https://picsum.photos/400/300?random=1"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    }
+  ],
+  "medium": [
+    {
+      "name": "Minnesota",
+      "size": "2.1m x 3.1m",
+      "depth": "1.3m",
+      "price": "R15 900",
+      "image": "https://picsum.photos/400/300?random=1"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    }
+  ],
+  "large": [    {
+      "name": "Minnesota",
+      "size": "2.1m x 3.1m",
+      "depth": "1.3m",
+      "price": "R15 900",
+      "image": "https://picsum.photos/400/300?random=1"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    }],
+  "freestanding": [    {
+      "name": "Minnesota",
+      "size": "2.1m x 3.1m",
+      "depth": "1.3m",
+      "price": "R15 900",
+      "image": "https://picsum.photos/400/300?random=1"
+    },
+    {
+      "name": "Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.1m",
+      "price": "R24 900",
+      "image": "https://picsum.photos/400/300?random=2"
+    }]
+}
