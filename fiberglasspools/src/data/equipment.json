@@ -1,5 +1,5 @@
 {
-  "splash": [
+  "1": [
     {
       "name": "Minnesota",
       "size": "2.1m x 3.1m",
@@ -29,7 +29,7 @@
       "image": "https://picsum.photos/400/300?random=2"
     }
   ],
-  "medium": [
+  "2": [
     {
       "name": "Minnesota",
       "size": "2.1m x 3.1m",
@@ -45,12 +45,12 @@
       "image": "https://picsum.photos/400/300?random=2"
     }
   ],
-  "large": [    {
-      "name": "Morocco",
-      "size": "4m x 10m",
-      "depth": "1m - 1.8m",
-      "price": "R73 800",
-      "image": "/Fiberglasspools/assets/pools/Morocco.jpg"
+  "3": [    {
+      "name": "Minnesota",
+      "size": "2.1m x 3.1m",
+      "depth": "1.3m",
+      "price": "R15 900",
+      "image": "https://picsum.photos/400/300?random=1"
     },
     {
       "name": "Nile",
@@ -59,7 +59,7 @@
       "price": "R24 900",
       "image": "https://picsum.photos/400/300?random=2"
     }],
-  "freestanding": [    {
+  "4": [    {
       "name": "Minnesota",
       "size": "2.1m x 3.1m",
       "depth": "1.3m",

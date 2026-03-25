@@ -32,9 +32,9 @@ const mobileOpen = ref(false)
           Gallery
         </router-link>
 
-        <router-link to="/delivery" class="hover:text-sky-200 transition">
+       <!--  <router-link to="/delivery" class="hover:text-sky-200 transition">
           Delivery
-        </router-link>
+        </router-link> -->
 
         <router-link to="/contact" class="hover:text-sky-200 transition">
           Contact
@@ -50,7 +50,7 @@ const mobileOpen = ref(false)
           href="https://wa.me/27767401410"
           target="_blank"
           rel="noopener"
-          class="hidden md:inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 px-4 py-2 rounded-lg transition shadow-md"
+          class="hidden md:inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg transition shadow-md"
         >
           <img :src="whatsappIcon" alt="WhatsApp" class="w-4 h-4" />
           <span>WhatsApp</span>
