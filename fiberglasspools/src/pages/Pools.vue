@@ -1,15 +1,39 @@
 <script setup>
 import { ref } from 'vue'
 import PoolCard from '../components/PoolCard.vue'
+import PoolDialog from '../components/PoolDialog.vue'
 import poolsData from '../data/pools.json'
 
+// Active tab
 const activeSection = ref('splash')
 
+// Dialog state
+const selectedPool = ref(null)
+const showDialog = ref(false)
+
+// Open dialog
+function openPool(pool) {
+  selectedPool.value = pool
+  showDialog.value = true
+
+  // 🔒 Prevent background scroll
+  document.body.style.overflow = 'hidden'
+}
+
+// Close dialog
+function closeDialog() {
+  showDialog.value = false
+  selectedPool.value = null // ✅ UX FIX (clear state)
+
+  // 🔓 Restore scroll
+  document.body.style.overflow = ''
+}
+
+// Sections
 const sections = [
   { key: 'splash', label: 'Splash Pools' },
   { key: 'medium', label: 'Medium Pools' },
-  { key: 'large', label: 'Large Pools' },
-  { key: 'freestanding', label: 'Freestanding Pools' }
+  { key: 'large', label: 'Large Pools' }
 ]
 </script>
 
@@ -24,7 +48,6 @@ const sections = [
 
       <!-- Tabs Navigation -->
       <div class="flex flex-wrap justify-center gap-4 mb-16">
-
         <button
           v-for="section in sections"
           :key="section.key"
@@ -38,7 +61,6 @@ const sections = [
         >
           {{ section.label }}
         </button>
-
       </div>
 
       <!-- Active Section Title -->
@@ -55,9 +77,18 @@ const sections = [
           v-for="pool in poolsData[activeSection]"
           :key="pool.name"
           :pool="pool"
+          @select="openPool"
         />
       </div>
 
     </div>
+
+    <!-- Dialog -->
+    <PoolDialog
+      v-if="selectedPool"
+      :pool="selectedPool"
+      :show="showDialog"
+      @close="closeDialog"
+    />
   </section>
 </template>

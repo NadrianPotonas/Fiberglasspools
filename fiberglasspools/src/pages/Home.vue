@@ -3,19 +3,19 @@ import PoolCard from '../components/PoolCard.vue'
 
 const pools = [
   {
-    name: 'Minnesota',
-    size: '2.1m x 3.1m',
-    depth: '1.3m',
-    price: 'R15 900',
-    image: 'https://picsum.photos/400/300?random=1',
-  },
-  {
-    name: 'Nile',
-    size: '3.0m x 4.0m',
-    depth: '1.1m',
-    price: 'R24 900',
-    image: 'https://picsum.photos/400/300?random=2',
-  },
+      "name": "Hudson",
+      "size": "3.0m x 5.0m",
+      "depth": "1.0m x 1.5m",
+      "price": "R24 900",
+      "image": "/Fiberglasspools/pools/Hudson.jpg"
+    },
+    {
+      "name": "Jordan",
+      "size": "3.0m x 6.4m",
+      "depth": "1.0m -1.6m",
+      "price": "R34 400",
+      "image": "/Fiberglasspools/pools/Jordan.jpg"
+    },
 ]
 
 </script>

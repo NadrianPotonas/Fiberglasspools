@@ -3,74 +3,46 @@
     {
       "name": "Minnesota",
       "size": "2.1m x 3.1m",
-      "depth": "1.3m",
+      "depth": "1.2m",
       "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
+      "image": "/Fiberglasspools/pools/Minnesota.jpg"
     }
   ],
   "medium": [
     {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
+      "name": "Hudson",
+      "size": "3.0m x 5.0m",
+      "depth": "1.0m x 1.5m",
+      "price": "R24 900",
+      "image": "/Fiberglasspools/pools/Hudson.jpg"
     },
     {
       "name": "Nile",
       "size": "3.0m x 4.0m",
-      "depth": "1.1m",
+      "depth": "1.2m",
       "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
+      "image": "/Fiberglasspools/pools/Nile.jpg"
     }
   ],
   "large": [    {
       "name": "Morocco",
-      "size": "4m x 10m",
-      "depth": "1m - 1.8m",
+      "size": "4.0m x 10.0m",
+      "depth": "1.0m - 1.8m",
       "price": "R73 800",
-      "image": "/Fiberglasspools/assets/pools/Morocco.jpg"
+      "image": "/Fiberglasspools/pools/Morocco.jpg"
     },
     {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    }],
-  "freestanding": [    {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
+      "name": "Jordan",
+      "size": "3.0m x 6.4m",
+      "depth": "1.0m -1.6m",
+      "price": "R34 400",
+      "image": "/Fiberglasspools/pools/Jordan.jpg"
     },
     {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
+      "name": "Missouri",
+      "size": "3.5m x 8m",
+      "depth": "1.0m -1.65m",
+      "price": "R44 800",
+      "image": "/Fiberglasspools/pools/Missouri.jpg"
     }]
 }

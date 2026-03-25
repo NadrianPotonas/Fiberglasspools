@@ -1,18 +1,22 @@
 <script setup>
-defineProps({
+const props = defineProps({
   pool: Object,
 })
+
+const emit = defineEmits(["select"])
 </script>
 
 <template>
-  <div class="bg-white rounded-lg shadow hover:shadow-lg transition">
-    <!-- Image placeholder -->
-    <div class="h-48 bg-sky-200 flex items-center justify-center text-sky-700 font-semibold">
+  <div
+    class="bg-white rounded-lg shadow hover:shadow-lg transition cursor-pointer"
+    @click="emit('select', pool)"
+  >
+    <div class="h-48 bg-sky-200">
       <img
         :src="pool.image"
         :alt="pool.name"
         class="w-full h-48 object-cover rounded-t-lg"
-        />
+      />
     </div>
 
     <div class="p-4">

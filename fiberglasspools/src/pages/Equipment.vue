@@ -6,10 +6,9 @@ import poolsData from '../data/pools.json'
 const activeSection = ref('splash')
 
 const sections = [
-  { key: 'splash', label: '1' },
-  { key: 'medium', label: '2' },
-  { key: 'large', label: '3' },
-  { key: 'freestanding', label: '4' }
+  { key: 'accessories', label: 'Accessories' },
+  { key: 'heating', label: 'Heating' },
+  { key: 'safety', label: 'safety' },
 ]
 </script>
 
