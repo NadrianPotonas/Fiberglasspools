@@ -32,8 +32,8 @@ const services = [
     title: 'Pool Relining',
     description:
       'Restore and modernise your existing pool with professional relining services.',
-    beforeImage: '/Fiberglasspools/public/Lining before.jpeg',
-    afterImage: '/Fiberglasspools/public/Lining after.jpeg'
+    beforeImage: '/Fiberglasspools/public/LiningBefore.jpeg',
+    afterImage: '/Fiberglasspools/public/LiningAfter.jpeg'
 }
 ]
 
