@@ -1,11 +1,53 @@
 {
-  "splash": [
+  "small": [
     {
       "name": "Minnesota",
       "size": "2.1m x 3.1m",
       "depth": "1.2m",
       "price": "R15 900",
       "image": "/Fiberglasspools/pools/Minnesota.jpg"
+    },
+    {
+      "name": "Amazone",
+      "size": "2.3m x 5.8m",
+      "depth": "900mm - 1.5m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Amazone.jpg"
+    },
+    {
+      "name": "Colorado",
+      "size": "2.45m x 2.45m",
+      "depth": "850mm",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Colorado.jpg"
+    },
+    {
+      "name": "Caledon",
+      "size": "3.0m x 3.6m",
+      "depth": "600mm",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Caledon.jpeg"
+    },
+    {
+      "name": "Okavango",
+      "size": "1.6m x 2.3m",
+      "depth": "900mm",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Okavango.jpg"
+    },
+    {
+      "name": "Splash Spa",
+      "size": "2.2m x 3.0m",
+      "depth": "1.0m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Splashspa.jpeg"
+    },
+    {
+      "name": "Savannah Spa",
+      "size": "2.4m x 2.4m",
+      "depth": "850mm",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/SavannahSpa.png"
     }
   ],
   "medium": [
@@ -22,9 +64,52 @@
       "depth": "1.2m",
       "price": "R24 900",
       "image": "/Fiberglasspools/pools/Nile.jpg"
+    },
+    {
+      "name": "Avon",
+      "size": "3.0m x 3.0m",
+      "depth": "1.2m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Avon.jpeg"
+    },
+    {
+      "name": "Manila",
+      "size": "2.3m x 3.5m",
+      "depth": "1.2m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Manila.png"
+    },
+    {
+      "name": "Narrow",
+      "size": "2.3m x 5.5m",
+      "depth": "900mm - 1.5m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Narrow.jpg"
+    },
+    {
+      "name": "Seychelles",
+      "size": "2.6m x 1.6m",
+      "depth": "1.0m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Seychelles.jpg"
+    },
+    {
+      "name": "Tinto",
+      "size": "3.0m x 4.0m",
+      "depth": "900mm - 1.4m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Tinto.jpg"
+    },
+    {
+      "name": "4 Seater Spa",
+      "size": "1.5m x 1.5m",
+      "depth": "800mm",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/4SeaterSpa.jpg"
     }
   ],
-  "large": [    {
+  "large": [
+    {
       "name": "Morocco",
       "size": "4.0m x 10.0m",
       "depth": "1.0m - 1.8m",
@@ -34,15 +119,103 @@
     {
       "name": "Jordan",
       "size": "3.0m x 6.4m",
-      "depth": "1.0m -1.6m",
+      "depth": "1.0m - 1.6m",
       "price": "R34 400",
       "image": "/Fiberglasspools/pools/Jordan.jpg"
     },
     {
       "name": "Missouri",
       "size": "3.5m x 8m",
-      "depth": "1.0m -1.65m",
+      "depth": "1.0m - 1.65m",
       "price": "R44 800",
       "image": "/Fiberglasspools/pools/Missouri.jpg"
-    }]
+    },
+    {
+      "name": "Elbe",
+      "size": "3.8m x 9.1m",
+      "depth": "1.1m - 1.8m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Elbe.jpg"
+    },
+    {
+      "name": "Limpopo",
+      "size": "3.8m x 5.8m",
+      "depth": "1.0m - 1.6m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Limpopo.jpg"
+    },
+    {
+      "name": "Mira",
+      "size": "3.8m x 8.0m",
+      "depth": "1.1m - 1.8m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Mira.jpg"
+    },
+    {
+      "name": "Mississippi",
+      "size": "3.2m x 5.2m",
+      "depth": "1.0m - 1.4m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Mississippi.jpg"
+    },
+    {
+      "name": "Reno",
+      "size": "3.8m x 6.0m",
+      "depth": "900mm - 1.6m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Reno.jpg"
+    },
+    {
+      "name": "Thames",
+      "size": "3.0m x 4.0m",
+      "depth": "1.0m - 1.3m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Thames.png"
+    },
+    {
+      "name": "Umfolozi",
+      "size": "3.0m x 5.8m",
+      "depth": "1.0m - 1.5m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Umfolozi.jpg"
+    },
+    {
+      "name": "Volta",
+      "size": "3.8m x 7.5m",
+      "depth": "1.1m - 1.8m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/Volta.jpg"
+    }
+  ],
+  "other": [
+    {
+      "name": "In Paradise",
+      "size": "3.8m x 7.0m",
+      "depth": "1.0m - 1.6m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/InParadise.jpg"
+    },
+    {
+      "name": "Hot Tub",
+      "size": "2.4m x 2.4m",
+      "depth": "1.2m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/HotTub.jpg"
+    },
+    {
+      "name": "Freestanding Minnesota",
+      "size": "2.2m x 3.1m",
+      "depth": "1.2m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/FreestandingMinnesota.jpg"
+    },
+    {
+      "name": "Freestanding Seychelles",
+      "size": "1.6m x 2.6m",
+      "depth": "1.0m",
+      "price": "R0",
+      "image": "/Fiberglasspools/pools/FreestandingSeychelles.jpg"
+    }
+
+  ]
 }

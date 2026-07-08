@@ -21,16 +21,16 @@ const mobileOpen = ref(false)
         </router-link>
 
         <router-link to="/pools" class="hover:text-sky-200 transition">
-          Pools
+          Fiberglass Pools
         </router-link>
 
-        <router-link to="/equipment" class="hover:text-sky-200 transition">
-          Equipment
+        <router-link to="/concrete" class="hover:text-sky-200 transition">
+          Concrete Pools
         </router-link>
 
-        <router-link to="/gallery" class="hover:text-sky-200 transition">
-          Gallery
-        </router-link>
+        <!-- <router-link to="/pavement" class="hover:text-sky-200 transition">
+          Pavement
+        </router-link> -->
 
        <!--  <router-link to="/delivery" class="hover:text-sky-200 transition">
           Delivery

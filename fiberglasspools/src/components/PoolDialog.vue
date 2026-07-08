@@ -8,37 +8,178 @@ const props = defineProps({
 
 const emit = defineEmits(["close"])
 
+const disclaimer =
+  'Prices shown are estimates only and may change depending on delivery location, site conditions, accessibility, and additional requirements. Final quotations are confirmed after consultation with our team.'
+
 // 🔹 Steps
 const step = ref(1)
+
+const customer = ref({
+  name: '',
+  surname: '',
+  phone: '',
+  email: '',
+  city: '',
+  province: '',
+  notes: '',
+})
+
+const quoteMessage = computed(() => {
+  const heating =
+    heatingOptions.find(x => x.value === addOns.value.heating)?.label ||
+    'None'
+
+  const cover =
+    coverOptions.find(x => x.value === addOns.value.cover)?.label ||
+    'None'
+
+  const paving =
+    pavingOptions.find(x => x.value === addOns.value.paving)?.label ||
+    'None'
+
+  return `
+Pool Quote Request
+
+Customer Details
+----------------
+Name: ${customer.value.name} ${customer.value.surname}
+Phone: ${customer.value.phone}
+Email: ${customer.value.email || 'Not provided'}
+Location: ${customer.value.city}, ${customer.value.province}
+
+Pool Details
+------------
+Pool: ${props.pool.name}
+Installation: ${
+  selectedOption.value === 'FULL'
+    ? 'Full Installation'
+    : 'DIY Package'
+}
+
+Extras
+-------
+Paving: ${paving}
+Heating: ${heating}
+Cover: ${cover}
+
+Estimated Price
+---------------
+From R${totalPrice.value.toLocaleString()}
+
+Additional Information
+----------------------
+${customer.value.notes || 'None'}
+`
+})
+
+function sendWhatsApp() {
+  const number = '27829760827'
+
+  window.open(
+    `https://wa.me/${number}?text=${encodeURIComponent(
+      quoteMessage.value
+    )}`,
+    '_blank'
+  )
+}
+
+function sendEmail() {
+  const subject = `Pool Quote Request - ${props.pool.name}`
+
+  window.location.href =
+    `mailto:quotes@yourcompany.co.za` +
+    `?subject=${encodeURIComponent(subject)}` +
+    `&body=${encodeURIComponent(quoteMessage.value)}`
+}
 
 // 🔹 Selection
 const selectedOption = ref(null)
 
 // 🔹 Add-ons (FULL only)
+const showAdditionalOptions = ref(false)
+
 const addOns = ref({
   paving: "none",
   heating: "none",
+  lighting: "none",
+  cover: "none",
+  waterFeature: "none",
 })
+
+const lightingOptions = [
+  {
+    value: "none",
+    label: "No Lighting",
+    price: 0,
+    image: "/Fiberglasspools/pavement/None.jpg",
+  },
+  {
+    value: "white",
+    label: "White LED Lights",
+    price: 2500,
+    image: "/Fiberglasspools/extras/white-led.jpg",
+  },
+  {
+    value: "rgb",
+    label: "RGB LED Lights",
+    price: 4500,
+    image: "/Fiberglasspools/extras/rgb-led.jpg",
+  },
+]
+
+const coverOptions = [
+  {
+    value: "none",
+    label: "No Cover",
+    price: 0,
+    image: "/Fiberglasspools/pavement/None.jpg",
+  },
+  {
+    value: "standard",
+    label: "Standard Cover",
+    price: 5000,
+    image: "/Fiberglasspools/extras/poolcover.jpg",
+  },
+  {
+    value: "automatic",
+    label: "Automatic Cover",
+    price: 12000,
+    image: "/Fiberglasspools/extras/automatic-cover.jpg",
+  },
+]
+
+const waterFeatureOptions = [
+  {
+    value: "none",
+    label: "No Water Feature",
+    price: 0,
+    image: "/Fiberglasspools/pavement/None.jpg",
+  },
+  {
+    value: "waterfall",
+    label: "Waterfall",
+    price: 8000,
+    image: "/Fiberglasspools/extras/waterfall.jpg",
+  },
+  {
+    value: "fountain",
+    label: "Fountain",
+    price: 6000,
+    image: "/Fiberglasspools/extras/fountain.jpg",
+  },
+]
 
 // 🔹 Paving options with images
 const pavingOptions = [
   {
     value: "none",
-    label: "No Paving",
-    price: 0,
-    image: "/Fiberglasspools/options/no-paving.jpg",
+    label: "Red Bricks",
+    image: "/Fiberglasspools/pavement/pavement.jpg",
   },
   {
     value: "standard",
-    label: "Standard Paving",
-    price: 5000,
-    image: "/Fiberglasspools/options/paving-standard.jpg",
-  },
-  {
-    value: "premium",
-    label: "Premium Paving",
-    price: 10000,
-    image: "/Fiberglasspools/options/paving-premium.jpg",
+    label: "Grey Bricks",
+    image: "/Fiberglasspools/pavement/pavement2.jpg",
   },
 ]
 
@@ -48,19 +189,13 @@ const heatingOptions = [
     value: "none",
     label: "No Heating",
     price: 0,
-    image: "/Fiberglasspools/options/no-heating.jpg",
+    image: "/Fiberglasspools/pavement/None12313.jpg",
   },
   {
     value: "solar",
     label: "Solar Heating",
     price: 8000,
-    image: "/Fiberglasspools/options/heating-solar.jpg",
-  },
-  {
-    value: "electric",
-    label: "Electric Heating",
-    price: 12000,
-    image: "/Fiberglasspools/options/heating-electric.jpg",
+    image: "/Fiberglasspools/pavement/solarheating.jpg",
   },
 ]
 
@@ -86,7 +221,7 @@ const installationPrice = computed(() => {
 
 // 🔹 Add-on pricing logic
 const addOnTotal = computed(() => {
-  if (selectedOption.value !== "FULL") return 0
+  // if (selectedOption.value !== "FULL") return 0
 
   let total = 0
 
@@ -98,8 +233,21 @@ const addOnTotal = computed(() => {
   if (addOns.value.heating === "solar") total += 8000
   if (addOns.value.heating === "electric") total += 12000
 
+  // Lighting
+  if (addOns.value.lighting === "white") total += 2500
+  if (addOns.value.lighting === "rgb") total += 4500
+
+  // Cover
+  if (addOns.value.cover === "standard") total += 5000
+  if (addOns.value.cover === "automatic") total += 12000
+
+  // Water Feature
+  if (addOns.value.waterFeature === "waterfall") total += 8000
+  if (addOns.value.waterFeature === "fountain") total += 6000
+
   return total
 })
+
 
 const totalPrice = computed(() => {
   return installationPrice.value + addOnTotal.value
@@ -115,7 +263,8 @@ function goToSummary() {
 }
 
 function goBack() {
-  if (step.value === 3) step.value = 2
+  if (step.value === 4) step.value = 3
+  else if (step.value === 3) step.value = 2
   else step.value = 1
 }
 
@@ -279,7 +428,9 @@ function selectOption(option) {
         <!-- ===================== -->
         <!-- STEP 3: SUMMARY -->
         <!-- ===================== -->
-        <div v-else class="space-y-6">
+        <div v-else-if="step === 3" class="space-y-6">
+
+        
 
         <!-- Image -->
         <img
@@ -302,89 +453,435 @@ function selectOption(option) {
             <li v-if="selectedOption === 'FULL'">Plumbing setup</li>
             </ul>
         </div>
+        <!-- 🔥 DIY ONLY: Add-ons -->
+        <div v-if="selectedOption === 'DIY'" class="space-y-8">
+
+            <!-- ADDITIONAL OPTIONS -->
+            <div class="border rounded-lg overflow-hidden">
+
+              <button
+                class="w-full bg-gray-100 px-4 py-3 flex justify-between items-center font-semibold"
+                @click="showAdditionalOptions = !showAdditionalOptions"
+              >
+                <span>Additional Options</span>
+
+                <span>
+                  {{ showAdditionalOptions ? '−' : '+' }}
+                </span>
+              </button>
+
+              <div v-if="showAdditionalOptions" class="space-y-8">
+
+                      <!-- HEATING -->
+                      <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in heatingOptions"
+                              :key="option.value"
+                              @click="addOns.heating = option.value"
+                              :class="[
+                              'border rounded-xl overflow-hidden cursor-pointer transition',
+                              addOns.heating === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                          >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                      <!-- COVER -->
+                      <!-- <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in coverOptions"
+                              :key="option.value"
+                              @click="addOns.cover  = option.value"
+                              :class="[
+                                'border rounded-xl overflow-hidden cursor-pointer transition',
+                                addOns.cover  === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                            >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div> -->
+
+                </div>
+            </div> 
+
+        </div>
 
         <!-- 🔥 FULL ONLY: Add-ons -->
         <div v-if="selectedOption === 'FULL'" class="space-y-8">
 
-        <!-- PAVING -->
-        <div>
-            <h4 class="font-bold mb-4">Paving Options</h4>
+            <!-- PAVING -->
+            <div>
+                <h4 class="font-bold mb-4">Paving Options</h4>
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div
-                v-for="option in pavingOptions"
-                :key="option.value"
-                @click="addOns.paving = option.value"
-                :class="[
-                'border rounded-xl overflow-hidden cursor-pointer transition',
-                addOns.paving === option.value
-                    ? 'border-sky-500 ring-2 ring-sky-300'
-                    : 'hover:shadow-md'
-                ]"
-            >
-                <img
-                :src="option.image"
-                class="h-32 w-full object-cover"
-                />
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div
+                    v-for="option in pavingOptions"
+                    :key="option.value"
+                    @click="addOns.paving = option.value"
+                    :class="[
+                    'border rounded-xl overflow-hidden cursor-pointer transition',
+                    addOns.paving === option.value
+                        ? 'border-sky-500 ring-2 ring-sky-300'
+                        : 'hover:shadow-md'
+                    ]"
+                >
+                    <img
+                    :src="option.image"
+                    class="h-32 w-full object-cover"
+                    />
 
-                <div class="p-3 text-sm">
-                <p class="font-semibold">{{ option.label }}</p>
-                <p class="text-gray-600">
-                    {{ option.price ? `+R${option.price}` : 'Included' }}
-                </p>
+                    <div class="p-3 text-sm">
+                    <p class="font-semibold">{{ option.label }}</p>
+                    <!-- <p class="text-gray-600">
+                        {{ option.price ? `+R${option.price}` : 'Included' }}
+                    </p> -->
+                    </div>
+                </div>
                 </div>
             </div>
-            </div>
-        </div>
+            <!-- ADDITIONAL OPTIONS -->
+            <div class="border rounded-lg overflow-hidden">
 
-        <!-- HEATING -->
-        <div>
-            <h4 class="font-bold mb-4">Heating Options</h4>
+              <button
+                class="w-full bg-gray-100 px-4 py-3 flex justify-between items-center font-semibold"
+                @click="showAdditionalOptions = !showAdditionalOptions"
+              >
+                <span>Additional Options</span>
 
-            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-            <div
-                v-for="option in heatingOptions"
-                :key="option.value"
-                @click="addOns.heating = option.value"
-                :class="[
-                'border rounded-xl overflow-hidden cursor-pointer transition',
-                addOns.heating === option.value
-                    ? 'border-sky-500 ring-2 ring-sky-300'
-                    : 'hover:shadow-md'
-                ]"
-            >
-                <img
-                :src="option.image"
-                class="h-32 w-full object-cover"
-                />
+                <span>
+                  {{ showAdditionalOptions ? '−' : '+' }}
+                </span>
+              </button>
 
-                <div class="p-3 text-sm">
-                <p class="font-semibold">{{ option.label }}</p>
-                <p class="text-gray-600">
-                    {{ option.price ? `+R${option.price}` : 'Included' }}
-                </p>
+              
+              <div v-if="showAdditionalOptions" class="space-y-8">
+
+                      <!-- HEATING -->
+                      <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in heatingOptions"
+                              :key="option.value"
+                              @click="addOns.heating = option.value"
+                              :class="[
+                              'border rounded-xl overflow-hidden cursor-pointer transition',
+                              addOns.heating === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                          >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div>
+                      <!-- LIGHTING -->
+                      <!-- <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in lightingOptions"
+                              :key="option.value"
+                              @click="addOns.lighting = option.value"
+                              :class="[
+                                'border rounded-xl overflow-hidden cursor-pointer transition',
+                                addOns.lighting === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                            >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div> -->
+                      <!-- COVER -->
+                      <!-- <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in coverOptions"
+                              :key="option.value"
+                              @click="addOns.cover  = option.value"
+                              :class="[
+                                'border rounded-xl overflow-hidden cursor-pointer transition',
+                                addOns.cover  === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                            >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div> -->
+                      <!-- WATER FEATURES -->
+                      <!-- <div>
+                          <h4 class="font-bold mb-4">Heating Options</h4>
+
+                          <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+                          <div
+                              v-for="option in waterFeatureOptions"
+                              :key="option.value"
+                              @click="addOns.waterFeature  = option.value"
+                              :class="[
+                                'border rounded-xl overflow-hidden cursor-pointer transition',
+                                addOns.waterFeature  === option.value
+                                  ? 'border-sky-500 ring-2 ring-sky-300'
+                                  : 'hover:shadow-md'
+                              ]"
+                            >
+                              <img
+                              :src="option.image"
+                              class="h-32 w-full object-cover"
+                              />
+
+                              <div class="p-3 text-sm">
+                              <p class="font-semibold">{{ option.label }}</p>
+                              <p class="text-gray-600">
+                                  {{ option.price ? `+R${option.price}` : 'Included' }}
+                              </p>
+                              </div>
+                          </div>
+                          </div>
+                      </div> -->
                 </div>
-            </div>
-            </div>
-        </div>
+            </div> 
 
         </div>
 
         <!-- Price -->
         <div class="bg-sky-50 p-4 rounded-lg">
-            <p>Base: R{{ installationPrice }}</p>
-            <p v-if="selectedOption === 'FULL'">Add-ons: R{{ addOnTotal }}</p>
-            <p class="font-bold text-lg mt-2">
-            Total: R{{ totalPrice }}
-            </p>
+
+          <h4 class="font-bold text-lg mb-4">
+            Price Breakdown
+          </h4>
+
+          <div class="space-y-2">
+
+            <div class="flex justify-between">
+              <span>Pool Package</span>
+              <span>R{{ installationPrice }}</span>
+            </div>
+
+            <div
+              v-if="addOns.paving !== 'none'"
+              class="flex justify-between"
+            >
+              <span>
+                {{ pavingOptions.find(x => x.value === addOns.paving)?.label }}
+              </span>
+              <span>+R5,000</span>
+            </div>
+
+            <div
+              v-if="addOns.heating !== 'none'"
+              class="flex justify-between"
+            >
+              <span>
+                {{ heatingOptions.find(x => x.value === addOns.heating)?.label }}
+              </span>
+              <span>
+                +R{{ heatingOptions.find(x => x.value === addOns.heating)?.price }}
+              </span>
+            </div>
+
+            <div
+              v-if="addOns.lighting !== 'none'"
+              class="flex justify-between"
+            >
+              <span>
+                {{ lightingOptions.find(x => x.value === addOns.lighting)?.label }}
+              </span>
+              <span>
+                +R{{ lightingOptions.find(x => x.value === addOns.lighting)?.price }}
+              </span>
+            </div>
+
+            <div
+              v-if="addOns.cover !== 'none'"
+              class="flex justify-between"
+            >
+              <span>
+                {{ coverOptions.find(x => x.value === addOns.cover)?.label }}
+              </span>
+              <span>
+                +R{{ coverOptions.find(x => x.value === addOns.cover)?.price }}
+              </span>
+            </div>
+
+            <div
+              v-if="addOns.waterFeature !== 'none'"
+              class="flex justify-between"
+            >
+              <span>
+                {{ waterFeatureOptions.find(x => x.value === addOns.waterFeature)?.label }}
+              </span>
+              <span>
+                +R{{ waterFeatureOptions.find(x => x.value === addOns.waterFeature)?.price }}
+              </span>
+            </div>
+
+            <hr class="my-3">
+
+            <div class="flex justify-between font-bold text-lg">
+              <span>Estimated Total</span>
+              <span>From R{{ totalPrice.toLocaleString() }}</span>
+            </div>
+            <div class="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+              <p class="text-sm text-gray-600">
+                {{ disclaimer }}
+              </p>
+            </div>
+          </div>
+
         </div>
 
         <!-- Order -->
         <button
-            class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
+            @click="step = 4" class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
         >
-            Order Now
+            Request Quote
         </button>
+        <p class="text-center text-sm text-gray-500 mt-3">
+          Our team will contact you to discuss delivery, installation requirements,
+          and provide a final quotation.
+        </p>
+        </div>
+        
+        <div v-else-if="step === 4" class="space-y-6">
+
+          <h3 class="text-xl font-semibold text-center">
+            Contact Details
+          </h3>
+
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <input
+              v-model="customer.name"
+              placeholder="Name"
+              class="border rounded-lg p-3"
+            />
+
+            <input
+              v-model="customer.surname"
+              placeholder="Surname"
+              class="border rounded-lg p-3"
+            />
+
+            <input
+              v-model="customer.phone"
+              placeholder="Phone Number"
+              class="border rounded-lg p-3"
+            />
+
+            <input
+              v-model="customer.email"
+              placeholder="Email (Optional)"
+              class="border rounded-lg p-3"
+            />
+
+            <input
+              v-model="customer.city"
+              placeholder="City"
+              class="border rounded-lg p-3"
+            />
+
+            <input
+              v-model="customer.province"
+              placeholder="Province"
+              class="border rounded-lg p-3"
+            />
+
+          </div>
+
+          <textarea
+            v-model="customer.notes"
+            rows="4"
+            placeholder="Additional information"
+            class="w-full border rounded-lg p-3"
+          />
+
+          <div class="grid md:grid-cols-2 gap-4">
+
+            <button
+              class="bg-green-600 text-white py-3 rounded-lg hover:bg-green-700"
+              @click="sendWhatsApp"
+            >
+              Send via WhatsApp
+            </button>
+
+            <button
+              class="bg-sky-600 text-white py-3 rounded-lg hover:bg-sky-700"
+              @click="sendEmail"
+            >
+              Send via Email
+            </button>
+
+          </div>
 
         </div>
 

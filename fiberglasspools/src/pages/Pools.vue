@@ -5,7 +5,7 @@ import PoolDialog from '../components/PoolDialog.vue'
 import poolsData from '../data/pools.json'
 
 // Active tab
-const activeSection = ref('splash')
+const activeSection = ref('small')
 
 // Dialog state
 const selectedPool = ref(null)
@@ -31,9 +31,10 @@ function closeDialog() {
 
 // Sections
 const sections = [
-  { key: 'splash', label: 'Splash Pools' },
-  { key: 'medium', label: 'Medium Pools' },
-  { key: 'large', label: 'Large Pools' }
+  { key: 'small', label: 'Small' },
+  { key: 'medium', label: 'Medium' },
+  { key: 'large', label: 'Large' },
+  { key: 'other', label: 'Other' },
 ]
 </script>
 
