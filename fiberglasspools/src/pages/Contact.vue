@@ -1,129 +1,37 @@
 <script setup>
 import { ref } from 'vue'
-
-const form = ref({
-  name: '',
-  email: '',
-  phone: '',
-  message: ''
-})
-
+const form = ref({ name: '', email: '', phone: '', location: '', message: '' })
+const sent = ref(false)
 const submitForm = () => {
-  console.log(form.value)
-  alert("Thank you! We'll contact you shortly.")
+  const subject = `Pool enquiry from ${form.value.name}`
+  const body = [`Name: ${form.value.name}`, `Email: ${form.value.email}`, `Phone: ${form.value.phone || 'Not provided'}`, `Location: ${form.value.location || 'Not provided'}`, '', form.value.message].join('\n')
+  window.location.href = `mailto:info@justfibreglasspools.co.za?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  sent.value = true
 }
 </script>
 
 <template>
-  <section class="bg-gray-50 py-24">
-    <div class="max-w-6xl mx-auto px-6">
-
-      <!-- Page Header -->
-      <div class="text-center mb-16">
-        <h1 class="text-4xl font-extrabold text-gray-800 mb-4">
-          Contact Us
-        </h1>
-        <p class="text-gray-600 max-w-2xl mx-auto">
-          Get in touch for a quote, consultation, or any questions about our pools and equipment.
-        </p>
-        <div class="w-24 h-1 bg-sky-500 mx-auto mt-6 rounded-full"></div>
-      </div>
-
-      <!-- Contact Grid -->
-      <div class="grid md:grid-cols-2 gap-16">
-
-        <!-- Left: Contact Details -->
-        <div class="space-y-8">
-
-          <div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">Phone</h3>
-            <p class="text-gray-600">+27 76 740 1410</p>
-          </div>
-
-          <div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">Email</h3>
-            <p class="text-gray-600">info@justfibreglasspools.co.za</p>
-          </div>
-
-          <div>
-            <h3 class="text-xl font-bold text-gray-800 mb-2">Location</h3>
-            <p class="text-gray-600">South Africa</p>
-          </div>
-
-          <!-- WhatsApp CTA -->
-          <a
-            href="https://wa.me/27767401410"
-            target="_blank"
-            class="inline-block bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg shadow-md transition"
-          >
-            Chat With Us on WhatsApp
-          </a>
-
-        </div>
-
-        <!-- Right: Contact Form -->
-        <div class="bg-white shadow-xl rounded-2xl p-8">
-
-          <form @submit.prevent="submitForm" class="space-y-6">
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Full Name
-              </label>
-              <input
-                v-model="form.name"
-                type="text"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-sky-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                v-model="form.email"
-                type="email"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-sky-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number
-              </label>
-              <input
-                v-model="form.phone"
-                type="tel"
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-sky-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-1">
-                Message
-              </label>
-              <textarea
-                v-model="form.message"
-                rows="5"
-                required
-                class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-sky-500 focus:outline-none"
-              ></textarea>
-            </div>
-
-            <button
-              type="submit"
-              class="w-full bg-sky-600 hover:bg-sky-700 text-white font-semibold py-3 rounded-lg transition shadow-md"
-            >
-              Send Message
-            </button>
-
-          </form>
-
-        </div>
+  <section class="page-hero"><div class="container"><p class="eyebrow dark">Get in touch</p><h1>Contact us.</h1><p>Have a question or ready to ask for a quote? Send us an email and we'll get back to you.</p></div></section>
+  <section class="page-section contact-section"><div class="container contact-grid">
+    <div class="contact-details">
+      <p class="eyebrow dark">Contact details</p><h2>Let's talk pools.</h2><p>Tell us what you're looking for and where you're located. We'll take it from there.</p>
+      <div class="detail-list">
+        <div><span>Phone</span><a href="tel:+27767401410">+27 76 740 1410</a></div>
+        <div><span>Email</span><a href="mailto:info@justfibreglasspools.co.za">info@justfibreglasspools.co.za</a></div>
+        <div><span>WhatsApp</span><a href="https://wa.me/27767401410" target="_blank" rel="noopener">Chat with us on WhatsApp →</a></div>
       </div>
     </div>
-  </section>
+    <div class="contact-form-card">
+      <h2>Send an enquiry</h2><p>Your email app will open with your message ready to send.</p>
+      <form class="contact-form" @submit.prevent="submitForm">
+        <label>Full name<input v-model="form.name" required type="text" placeholder="Your name"></label>
+        <label>Email address<input v-model="form.email" required type="email" placeholder="you@example.com"></label>
+        <label>Phone number<input v-model="form.phone" type="tel" placeholder="Your phone number"></label>
+        <label>Location<input v-model="form.location" type="text" placeholder="City / area"></label>
+        <label class="full">Message<textarea v-model="form.message" required rows="5" placeholder="Tell us what you need..."></textarea></label>
+        <button class="submit-button full" type="submit">Send by email <span>→</span></button>
+      </form>
+      <p v-if="sent" class="form-note">Your email app should have opened. If it didn't, email us directly at <a href="mailto:info@justfibreglasspools.co.za">info@justfibreglasspools.co.za</a>.</p>
+    </div>
+  </div></section>
 </template>

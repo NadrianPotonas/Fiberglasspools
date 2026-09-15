@@ -1,194 +1,73 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import PoolCard from '../components/PoolCard.vue'
+import { RouterLink } from 'vue-router'
+import poolsData from '../data/pools.json'
 
-const featuredPools = [
-  {
-    title: 'Winter Special',
-    description: 'Get up to 15% off selected fibreglass pools.',
-    image: '/Fiberglasspools/pools/Hudson.jpg'
-  },
-  {
-    title: 'Free Delivery Promotion',
-    description: 'Free delivery on selected pool installations.',
-    image: '/Fiberglasspools/specials/special2.jpg'
-  }
-]
-const reliningSlider = ref(50)
-const services = [
-  {
-    title: 'Fibreglass Pools',
-    description:
-      'Supply and installation of premium fibreglass pools in various sizes and designs.',
-    image: '/Fiberglasspools/services/fiberglass.jpg'
-  },
-  {
-    title: 'Concrete Pools',
-    description:
-      'Custom-designed concrete pools built to your exact specifications.',
-    image: '/Fiberglasspools/services/concrete.jpg'
-  },
-  {
-    title: 'Pool Relining',
-    description:
-      'Restore and modernise your existing pool with professional relining services.',
-    beforeImage: '/Fiberglasspools/public/LiningBefore.jpeg',
-    afterImage: '/Fiberglasspools/public/LiningAfter.jpeg'
-}
-]
+const featured = [
+  ...poolsData.small,
+  ...poolsData.medium,
+  ...poolsData.large,
+].filter((pool, i, arr) => arr.findIndex(p => p.name === pool.name) === i).slice(0, 6)
 
-const currentSlide = ref(0)
-let interval = null
-
-onMounted(() => {
-  interval = setInterval(() => {
-    currentSlide.value =
-      (currentSlide.value + 1) % featuredPools.length
-  }, 5000)
-})
-
-onUnmounted(() => {
-  clearInterval(interval)
-})
+const asset = path => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
 </script>
 
 <template>
-  <!-- Featured Specials -->
-  <section class="relative h-[500px] overflow-hidden">
-    <div
-      v-for="(slide, index) in featuredPools"
-      :key="index"
-      class="absolute inset-0 transition-opacity duration-700"
-      :class="currentSlide === index ? 'opacity-100' : 'opacity-0'"
-    >
-      <img
-        :src="slide.image"
-        :alt="slide.title"
-        class="w-full h-full object-cover"
-      />
-
-      <div
-        class="absolute inset-0 bg-black/50 flex flex-col justify-center items-center text-center text-white px-6"
-      >
-        <h1 class="text-4xl md:text-5xl font-bold mb-4">
-          {{ slide.title }}
-        </h1>
-
-        <p class="text-lg md:text-xl mb-6 max-w-2xl">
-          {{ slide.description }}
-        </p>
-
-        <a
-          href="#services"
-          class="bg-sky-500 hover:bg-sky-600 px-6 py-3 rounded-lg font-semibold"
-        >
-          Learn More
-        </a>
+  <section class="hero home-hero" :style="{ backgroundImage: `url(${asset('pools/Hudson1.jpg')})` }">
+    <div class="hero-overlay"></div>
+    <div class="container hero-content">
+      <p class="eyebrow">Fibreglass pools • South Africa</p>
+      <h1>A pool you'll love.<br><em>A quote made simple.</em></h1>
+      <p class="hero-copy">Browse our range of fibreglass pools, choose your favourite and request a quote. Simple, straightforward and without the unnecessary steps.</p>
+      <div class="hero-actions">
+        <RouterLink to="/pools" class="primary-button">View our pools <span>→</span></RouterLink>
+        <RouterLink to="/contact" class="secondary-button">Contact us</RouterLink>
       </div>
-    </div>
-
-    <!-- Indicators -->
-    <div
-      class="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3"
-    >
-      <button
-        v-for="(_, index) in featuredPools"
-        :key="index"
-        @click="currentSlide = index"
-        class="w-3 h-3 rounded-full"
-        :class="
-          currentSlide === index
-            ? 'bg-white'
-            : 'bg-white/50'
-        "
-      />
     </div>
   </section>
 
-  <!-- What We Do -->
-  <section id="services" class="py-16 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-12">
-        What We Do
-      </h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div
-          v-for="service in services"
-          :key="service.title"
-          class="bg-white rounded-xl shadow-lg overflow-hidden"
-        >
-          <div
-            v-if="service.beforeImage"
-            class="relative h-56 overflow-hidden"
-          >
-            <!-- Before -->
-            <img
-              :src="service.afterImage"
-              class="absolute inset-0 w-full h-full object-cover"
-            />
-
-            <!-- After -->
-            <div
-              class="absolute inset-0 overflow-hidden"
-              :style="{ width: reliningSlider + '%' }"
-            >
-              <img
-                :src="service.beforeImage"
-                class="w-full h-full object-cover"
-              />
-            </div>
-
-            <!-- Divider -->
-            <div
-              class="absolute top-0 bottom-0 w-1 bg-white"
-              :style="{ left: reliningSlider + '%' }"
-            >
-              <div
-                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
-                      w-8 h-8 rounded-full bg-white shadow flex items-center justify-center"
-              >
-                ↔
-              </div>
-            </div>
-
-            <!-- Labels -->
-            <span class="absolute top-2 left-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-              Before
-            </span>
-
-            <span class="absolute top-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
-              After
-            </span>
-
-            <!-- Slider -->
-            <input
-              type="range"
-              min="0"
-              max="100"
-              v-model="reliningSlider"
-              class="absolute inset-0 opacity-0 cursor-ew-resize"
-            />
-          </div>
-
-          <img
-            v-else
-            :src="service.image"
-            :alt="service.title"
-            class="h-56 w-full object-cover"
-          />
-
-          <div class="p-6">
-            <h3 class="text-xl font-bold mb-3">
-              {{ service.title }}
-            </h3>
-
-            <p class="text-gray-600">
-              {{ service.description }}
-            </p>
-          </div>
-        </div>
+  <section class="intro-section">
+    <div class="container split-intro">
+      <div>
+        <p class="eyebrow dark">Just Fibreglass Pools</p>
+        <h2>Find the right pool without the hassle.</h2>
       </div>
+      <div class="intro-copy">
+        <p>Our website is simple for a reason. See the pools, compare the basics and ask us for a quote. We'll help you with the details of your site, delivery and installation from there.</p>
+        <RouterLink to="/pools" class="text-link">Explore the full range <span>→</span></RouterLink>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow dark">Our pools</p><h2>Start with a pool you like.</h2></div>
+        <RouterLink to="/pools" class="text-link">View all pools <span>→</span></RouterLink>
+      </div>
+      <div class="pool-grid home-pool-grid">
+        <article v-for="pool in featured" :key="pool.name" class="pool-card">
+          <div class="pool-image-wrap"><img :src="asset(pool.image)" :alt="pool.name" class="pool-image" loading="lazy"></div>
+          <div class="pool-info compact"><h3>{{ pool.name }}</h3><p>{{ pool.size }} <span>•</span> {{ pool.depth }}</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="concrete-home-section">
+    <div class="container concrete-home-inner">
+      <div>
+        <p class="eyebrow dark">More than fibreglass</p>
+        <h2>We also build concrete pools.</h2>
+        <p>Looking for a custom-built pool? We also offer concrete pools for customers who want a bespoke design.</p>
+      </div>
+      <RouterLink to="/contact" class="secondary-button">Enquire about a concrete pool</RouterLink>
+    </div>
+  </section>
+
+  <section class="why-strip">
+    <div class="container why-strip-inner">
+      <div><p class="eyebrow">Why fibreglass?</p><h2>Strong. Smooth. Quick to install.</h2></div>
+      <RouterLink to="/why-fibreglass" class="light-button">Why choose fibreglass? <span>→</span></RouterLink>
     </div>
   </section>
 </template>
