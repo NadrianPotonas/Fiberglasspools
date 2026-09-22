@@ -7,7 +7,7 @@ const emit = defineEmits(["select"])
 
 const asset = (path) => {
   if (!path) return ''
-  return `${import.meta.env.BASE_URL}images/${path.replace(/^\/+/, '')}`
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 }
 </script>
 

@@ -6,7 +6,7 @@ const form = ref({ name: '', email: '', phone: '', location: '', message: '' })
 const sent = ref(false)
 const asset = (path) => {
   if (!path) return ''
-  return `${import.meta.env.BASE_URL}images/${path.replace(/^\/+/, '')}`
+  return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 }
 function submitQuote() {
   const subject = `Quote request - ${props.pool.name}`
