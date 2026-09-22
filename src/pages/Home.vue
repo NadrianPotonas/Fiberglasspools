@@ -8,7 +8,10 @@ const featured = [
   ...poolsData.large,
 ].filter((pool, i, arr) => arr.findIndex(p => p.name === pool.name) === i).slice(0, 6)
 
-const asset = path => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+const asset = (path) => {
+  if (!path) return ''
+  return `${import.meta.env.BASE_URL}images/${path.replace(/^\/+/, '')}`
+}
 </script>
 
 <template>
@@ -46,7 +49,7 @@ const asset = path => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
       </div>
       <div class="pool-grid home-pool-grid">
         <article v-for="pool in featured" :key="pool.name" class="pool-card">
-          <div class="pool-image-wrap"><img :src="asset(pool.image)" :alt="pool.name" class="pool-image" loading="lazy"></div>
+          <div class="pool-image-wrap"><img :src="asset(pool.shellImage || pool.image)" :alt="pool.name" class="pool-image" loading="lazy"></div>
           <div class="pool-info compact"><h3>{{ pool.name }}</h3><p>{{ pool.size }} <span>•</span> {{ pool.depth }}</p></div>
         </article>
       </div>

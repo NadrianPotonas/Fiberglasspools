@@ -4,31 +4,56 @@ const props = defineProps({
 })
 
 const emit = defineEmits(["select"])
+
+const asset = (path) => {
+  if (!path) return ''
+  return `${import.meta.env.BASE_URL}images/${path.replace(/^\/+/, '')}`
+}
 </script>
 
 <template>
-  <div
-    class="bg-white rounded-lg shadow hover:shadow-lg transition cursor-pointer"
+  <article
+    class="pool-card"
     @click="emit('select', pool)"
   >
-    <div class="h-48 bg-sky-200">
-      <img
-        :src="pool.image"
-        :alt="pool.name"
-        class="w-full h-48 object-cover rounded-t-lg"
-      />
+    <div class="pool-image-wrap">
+      <div class="pool-image-grid">
+        <div class="pool-photo">
+          <span class="pool-photo-label">Shell</span>
+          <img
+            v-if="pool.shellImage || pool.image"
+            :src="asset(pool.shellImage || pool.image)"
+            :alt="`${pool.name} shell`"
+            class="pool-image"
+            loading="lazy"
+          />
+          <div v-else class="pool-photo-placeholder">Shell photo not set</div>
+        </div>
+
+        <div class="pool-photo">
+          <span class="pool-photo-label">Installation</span>
+          <img
+            v-if="pool.installationImage"
+            :src="asset(pool.installationImage)"
+            :alt="`${pool.name} installation`"
+            class="pool-image"
+            loading="lazy"
+          />
+          <div v-else class="pool-photo-placeholder">Installation photo not set</div>
+        </div>
+      </div>
     </div>
 
-    <div class="p-4">
-      <h4 class="font-bold text-lg mb-2">{{ pool.name }}</h4>
-      <p class="text-sm text-gray-600">
-        Size: {{ pool.size }}<br />
-        Depth: {{ pool.depth }}
-      </p>
+    <div class="pool-info">
+      <h3>{{ pool.name }}</h3>
+      <p>{{ pool.size }} <span>•</span> {{ pool.depth }}</p>
 
-      <p class="mt-3 font-bold text-sky-600">
-        {{ pool.price }}
-      </p>
+      <div class="pool-bottom">
+        <strong>{{ pool.price !== 'R0' ? `From ${pool.price}` : 'Price on request' }}</strong>
+        <button class="quote-button" @click.stop="emit('select', pool)">
+          Request quote <span>→</span>
+        </button>
+      </div>
     </div>
-  </div>
+  </article>
 </template>
