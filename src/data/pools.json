@@ -29,16 +29,16 @@
       "size": "3.0m x 3.6m",
       "depth": "600mm",
       "price": "R1",
-      "shellImage": "pools/Caledon.jpeg",
-      "installationImage": ""
+      "shellImage": "pools/Caledon-shell.jpeg",
+      "installationImage": "pools/Caledon.jpeg"
     },
     {
       "name": "Okavango",
       "size": "1.6m x 2.3m",
       "depth": "900mm",
       "price": "R0",
-      "shellImage": "pools/Okavango.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Okavango-shell.jpg",
+      "installationImage": "pools/Okavango.jpeg"
     },
     {
       "name": "Splash Spa",
@@ -53,7 +53,7 @@
       "size": "2.4m x 2.4m",
       "depth": "850mm",
       "price": "R0",
-      "shellImage": "pools/SavannahSpa.png",
+      "shellImage": "pools/Savanahspa-shell.jpeg",
       "installationImage": ""
     }
   ],
@@ -64,7 +64,7 @@
       "depth": "1.0m - 1.4m",
       "price": "R26 900.00",
       "shellImage": "pools/Hudson-shell.jpeg",
-      "installationImage": "pools/Hudson.jpg"
+      "installationImage": "pools/Hudson.jpeg"
     },
     {
       "name": "Nile",
@@ -96,30 +96,30 @@
       "depth": "1.0m - 1.5m",
       "price": "R27 800.00",
       "shellImage": "pools/narrow-shell.jpg",
-      "installationImage": "pools/narrow.jpeg"
+      "installationImage": "pools/Narrow.jpeg"
     },
     {
       "name": "Seychelles",
       "size": "2.6m x 1.6m",
       "depth": "1.0m",
       "price": "R0",
-      "shellImage": "pools/Seychelles.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Seychelles-shell.jpg",
+      "installationImage": "pools/Seychelles.png"
     },
     {
       "name": "Tinto",
       "size": "3.0m x 4.0m",
       "depth": "900mm - 1.4m",
       "price": "R0",
-      "shellImage": "pools/Tinto.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Tinto-shell.jpg",
+      "installationImage": "pools/Tinto.jpeg"
     },
     {
       "name": "4 Seater Spa",
       "size": "1.5m x 1.5m",
       "depth": "800mm",
       "price": "R0",
-      "shellImage": "pools/4SeaterSpa.jpg",
+      "shellImage": "pools/4seaterspa-shell.png",
       "installationImage": ""
     }
   ],
@@ -129,8 +129,8 @@
       "size": "4.0m x 10.0m",
       "depth": "1.0m - 1.8m",
       "price": "R73 800",
-      "shellImage": "pools/Morocco.jpg",
-      "installationImage": ""
+      "shellImage": "pools/morrocco-shell.png",
+      "installationImage": "pools/Morrocco.jpeg"
     },
     {
       "name": "Jordan",
@@ -138,39 +138,39 @@
       "depth": "1.0m - 1.6m",
       "price": "R34 400",
       "shellImage": "pools/Jordan-shell.jpg",
-      "installationImage": "pools/Jordan.jpg"
+      "installationImage": "pools/Jordan.jpeg"
     },
     {
       "name": "Missouri",
       "size": "3.5m x 8m",
       "depth": "1.0m - 1.65m",
       "price": "R44 800",
-      "shellImage": "pools/Missouri.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Missouri-shell.jpg",
+      "installationImage": "pools/Missouri.jpeg"
     },
     {
       "name": "Elbe",
       "size": "3.8m x 9.1m",
       "depth": "1.1m - 1.8m",
       "price": "R0",
-      "shellImage": "pools/Elbe.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Elbe-shell.jpg",
+      "installationImage": "pools/Elbe.jpeg"
     },
     {
       "name": "Limpopo",
       "size": "3.8m x 5.8m",
       "depth": "1.0m - 1.6m",
       "price": "R0",
-      "shellImage": "pools/Limpopo.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Limpopo-shell.jpg",
+      "installationImage": "pools/limpopo.jpeg"
     },
     {
       "name": "Mira",
       "size": "3.8m x 8.0m",
       "depth": "1.1m - 1.8m",
       "price": "R0",
-      "shellImage": "pools/Mira.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Mira-shell.jpg",
+      "installationImage": "pools/Mira.jpeg"
     },
     {
       "name": "Mississippi",
@@ -185,32 +185,32 @@
       "size": "3.8m x 6.0m",
       "depth": "900mm - 1.6m",
       "price": "R0",
-      "shellImage": "pools/Reno.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Reno-shell.jpg",
+      "installationImage": "pools/Reno.jpeg"
     },
     {
       "name": "Thames",
       "size": "3.0m x 4.0m",
       "depth": "1.0m - 1.3m",
       "price": "R0",
-      "shellImage": "pools/Thames.png",
-      "installationImage": ""
+      "shellImage": "pools/Thames-shell.png",
+      "installationImage": "pools/Thames.jpeg"
     },
     {
       "name": "Umfolozi",
       "size": "3.0m x 5.8m",
       "depth": "1.0m - 1.5m",
       "price": "R0",
-      "shellImage": "pools/Umfolozi.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Umfolozi-shell.jpg",
+      "installationImage": "pools/Umfolozi.jpeg"
     },
     {
       "name": "Volta",
       "size": "3.8m x 7.5m",
       "depth": "1.1m - 1.8m",
       "price": "R0",
-      "shellImage": "pools/Volta.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Volta-shell.jpg",
+      "installationImage": "pools/volta.jpeg"
     }
   ],
   "other": [
@@ -219,15 +219,15 @@
       "size": "3.8m x 7.0m",
       "depth": "1.0m - 1.6m",
       "price": "R0",
-      "shellImage": "pools/InParadise.jpg",
-      "installationImage": ""
+      "shellImage": "pools/Inparadise-shell.jpg",
+      "installationImage": "pools/InParadise.jpeg"
     },
     {
       "name": "Hot Tub",
       "size": "2.4m x 2.4m",
       "depth": "1.2m",
       "price": "R0",
-      "shellImage": "",
+      "shellImage": "pools/Hottub-shell.jpg",
       "installationImage": ""
     },
     {
