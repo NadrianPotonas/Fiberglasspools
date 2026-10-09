@@ -1,8 +1,9 @@
-<script setup>
 
+<script setup>
 import { ref } from 'vue'
 
 const props = defineProps({
+  inline: { type: Boolean, default: false },
   pool: {
     type: Object,
     required: true,
@@ -10,6 +11,9 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['close'])
+
+const whatsappNumber = '27XXXXXXXXX'
+const emailAddress = 'info@justfibreglasspools.co.za'
 
 const form = ref({
   name: '',
@@ -19,18 +23,15 @@ const form = ref({
   message: '',
 })
 
-const sent = ref(false)
+const formRef = ref(null)
 
 const asset = (path) => {
   if (!path) return ''
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 }
 
-function submitQuote() {
-
-  const subject = `Quote request - ${props.pool.name}`
-
-  const body = [
+function buildQuoteMessage() {
+  return [
     `Pool: ${props.pool.name}`,
     `Size: ${props.pool.size}`,
     `Depth: ${props.pool.depth}`,
@@ -42,58 +43,68 @@ function submitQuote() {
     '',
     form.value.message || 'No additional message.',
   ].join('\n')
-
-  window.location.href =
-    `mailto:info@justfibreglasspools.co.za?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-
-  sent.value = true
 }
 
+function submitQuote(method) {
+  if (!formRef.value?.reportValidity()) return
+
+  const message = buildQuoteMessage()
+
+  if (method === 'email') {
+    const subject = `Quote request - ${props.pool.name}`
+
+    window.location.href =
+      `mailto:${emailAddress}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`
+  }
+
+  if (method === 'whatsapp') {
+    const whatsappMessage =
+      `Quote request - ${props.pool.name}\n\n${message}`
+
+    const url =
+      `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`
+
+    window.open(url, '_blank', 'noopener,noreferrer')
+  }
+}
 </script>
 
 <template>
-
   <div
-    class="modal-backdrop"
+    :class="inline ? 'quote-inline' : 'modal-backdrop'"
     @click.self="emit('close')"
   >
-
     <section
       class="quote-modal"
-      role="dialog"
-      aria-modal="true"
+      :role="inline ? undefined : 'dialog'"
+      :aria-modal="inline ? undefined : true"
       aria-label="Request a pool quote"
     >
-
       <!-- CLOSE BUTTON -->
-
       <button
+        v-if="!inline"
         class="modal-close"
+        type="button"
         aria-label="Close"
         @click="emit('close')"
       >
         ×
       </button>
 
-
       <!-- SELECTED POOL -->
-
       <div class="modal-pool">
-
         <img
-          :src="asset(pool.shellImage || pool.image)"
+          v-if="pool.shellImage || pool.image || pool.installationImage"
+          :src="asset(pool.installationImage)"
           :alt="pool.name"
         />
 
         <div>
-
           <p class="eyebrow dark">
             Selected pool
           </p>
 
-          <h2>
-            {{ pool.name }}
-          </h2>
+          <h2>{{ pool.name }}</h2>
 
           <p>
             {{ pool.size }}
@@ -102,154 +113,132 @@ function submitQuote() {
           </p>
 
           <strong>
-            {{ pool.price !== 'R0'
-              ? `From ${pool.price}`
-              : 'Price on request'
+            {{
+              pool.price && pool.price !== 'R0'
+                ? `From ${pool.price}`
+                : 'Price on request'
             }}
           </strong>
-
         </div>
-
       </div>
 
-
-      <!-- QUOTE FORM -->
-
-      <div v-if="!sent">
-
-        <div class="modal-heading">
-
-          <h3>
-            Request your quote.
-          </h3>
-
-          <p>
-            We'll receive your enquiry by email.
-          </p>
-
-        </div>
-
-
-        <form
-          class="quote-form"
-          @submit.prevent="submitQuote"
-        >
-
-          <label>
-            Name
-
-            <input
-              v-model="form.name"
-              required
-              placeholder="Your name"
-            />
-          </label>
-
-
-          <label>
-            Email
-
-            <input
-              v-model="form.email"
-              required
-              type="email"
-              placeholder="you@example.com"
-            />
-          </label>
-
-
-          <label>
-            Phone
-
-            <input
-              v-model="form.phone"
-              required
-              type="tel"
-              placeholder="Your phone number"
-            />
-          </label>
-
-
-          <label>
-            Location
-
-            <input
-              v-model="form.location"
-              required
-              placeholder="City / area"
-            />
-          </label>
-
-
-          <label class="full">
-            Message
-
-            <textarea
-              v-model="form.message"
-              rows="3"
-              placeholder="Optional"
-            ></textarea>
-          </label>
-
-
-          <button
-            class="submit-button full"
-            type="submit"
-          >
-            Send quote request by email
-            <span>→</span>
-          </button>
-
-        </form>
-
-      </div>
-
-
-      <!-- SUCCESS -->
-
-      <div
-        v-else
-        class="success-state"
-      >
-
-        <div class="success-icon">
-          ✓
-        </div>
-
-        <h3>
-          Your quote request is ready.
-        </h3>
+      <!-- FORM HEADING -->
+      <div class="modal-heading">
+        <h3>Request your quote.</h3>
 
         <p>
-          Your email app should have opened with the pool details included.
+          Fill in your details and choose whether to send
+          your enquiry via Email or WhatsApp.
         </p>
-
-        <button
-          class="submit-button"
-          @click="emit('close')"
-        >
-          Done
-        </button>
-
       </div>
 
+      <!-- QUOTE FORM -->
+      <form
+        ref="formRef"
+        class="quote-form"
+        @submit.prevent
+      >
+        <label>
+          Name
+          <input
+            v-model="form.name"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+          />
+        </label>
+
+        <label>
+          Email
+          <input
+            v-model="form.email"
+            required
+            type="email"
+            autocomplete="email"
+            placeholder="you@example.com"
+          />
+        </label>
+
+        <label>
+          Phone
+          <input
+            v-model="form.phone"
+            required
+            type="tel"
+            autocomplete="tel"
+            placeholder="Your phone number"
+          />
+        </label>
+
+        <label>
+          Location
+          <input
+            v-model="form.location"
+            required
+            placeholder="City / area"
+          />
+        </label>
+
+        <label class="full">
+          Message
+          <textarea
+            v-model="form.message"
+            rows="3"
+            placeholder="Optional"
+          ></textarea>
+        </label>
+
+        <!-- SEND OPTIONS -->
+        <div class="full quote-actions">
+          <button
+            type="button"
+            class="submit-button email-button"
+            @click="submitQuote('email')"
+          >
+            <span class="button-icon">✉</span>
+            Send via Email
+          </button>
+
+          <button
+            type="button"
+            class="submit-button whatsapp-button"
+            @click="submitQuote('whatsapp')"
+          >
+            <span class="button-icon">◉</span>
+            Send via WhatsApp
+          </button>
+        </div>
+
+        <p class="full send-note">
+          Your email or WhatsApp will open with your
+          quote request ready to send.
+        </p>
+      </form>
     </section>
-
   </div>
-
 </template>
 
-
 <style scoped>
+/* =========================================
+   INLINE MODE
+========================================= */
+
+.quote-inline {
+  margin: 24px auto;
+  max-width: 768px;
+}
+
+.quote-inline .quote-modal {
+  max-width: none;
+}
 
 /* =========================================
    MODAL BACKDROP
 ========================================= */
 
 .modal-backdrop {
-  @apply fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm p-4 sm:p-8 overflow-y-auto flex items-center justify-center;
+  @apply fixed inset-0 z-50 bg-slate-950/70 backdrop-blur-sm p-4 sm:p-8 overflow-y-auto flex items-start sm:items-center justify-center;
 }
-
 
 /* =========================================
    MODAL
@@ -259,7 +248,6 @@ function submitQuote() {
   @apply relative bg-white w-full max-w-3xl rounded-3xl shadow-2xl overflow-hidden;
 }
 
-
 /* =========================================
    CLOSE BUTTON
 ========================================= */
@@ -267,7 +255,6 @@ function submitQuote() {
 .modal-close {
   @apply absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/90 text-slate-800 text-2xl leading-none shadow hover:bg-slate-100;
 }
-
 
 /* =========================================
    SELECTED POOL
@@ -301,7 +288,6 @@ function submitQuote() {
   @apply text-slate-900;
 }
 
-
 /* =========================================
    MODAL HEADING
 ========================================= */
@@ -317,7 +303,6 @@ function submitQuote() {
 .modal-heading p {
   @apply mt-1 text-slate-500;
 }
-
 
 /* =========================================
    QUOTE FORM
@@ -340,47 +325,83 @@ function submitQuote() {
   resize: vertical;
 }
 
-
 /* =========================================
-   FULL WIDTH FORM ELEMENT
+   FULL WIDTH
 ========================================= */
 
 .full {
   @apply sm:col-span-2;
 }
 
-
 /* =========================================
-   SUBMIT BUTTON
+   SEND BUTTONS
 ========================================= */
+
+.quote-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
 
 .submit-button {
-  @apply rounded-xl bg-sky-600 hover:bg-sky-700 text-white px-5 py-3.5 font-bold transition;
+  @apply rounded-xl text-white px-5 py-3.5 font-bold transition flex items-center justify-center gap-2;
+
+  cursor: pointer;
+  border: none;
+  min-height: 52px;
 }
 
+.email-button {
+  background: #0284c7;
+}
+
+.email-button:hover {
+  background: #0369a1;
+}
+
+.whatsapp-button {
+  background: #16a34a;
+}
+
+.whatsapp-button:hover {
+  background: #15803d;
+}
+
+.button-icon {
+  font-size: 20px;
+  line-height: 1;
+}
 
 /* =========================================
-   SUCCESS STATE
+   SEND NOTE
 ========================================= */
 
-.success-state {
-  @apply p-10 sm:p-14 text-center;
+.send-note {
+  @apply text-xs text-slate-500 text-center;
+
+  margin-top: 2px;
 }
 
-.success-state h3 {
-  @apply text-2xl font-black;
-}
+/* =========================================
+   MOBILE
+========================================= */
 
-.success-state p {
-  @apply mt-1 text-slate-500;
-}
+@media (max-width: 480px) {
+  .quote-actions {
+    grid-template-columns: 1fr;
+  }
 
-.success-icon {
-  @apply mx-auto mb-5 w-14 h-14 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl font-black;
-}
+  .modal-pool {
+    gap: 12px;
+  }
 
-.success-state .submit-button {
-  @apply mt-7 px-10;
-}
+  .modal-pool h2 {
+    font-size: 24px;
+  }
 
+  .submit-button {
+    width: 100%;
+  }
+}
 </style>

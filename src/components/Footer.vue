@@ -25,5 +25,7 @@ const logo = `${import.meta.env.BASE_URL}images/Logo.png`
       </div>
     </div>
     <div class="container copyright">© {{ new Date().getFullYear() }} Just Fibreglass Pools South Africa</div>
-  </footer>
+  <nav class="container" aria-label="More information" style="display:flex;flex-wrap:wrap;gap:16px;padding-bottom:20px">
+<RouterLink to="/about">About us</RouterLink><RouterLink to="/entrepreneur">Become an entrepreneur</RouterLink>
+</nav></footer>
 </template>

@@ -1,6 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
+import { makeRouter } from './router'
+import { updateHead } from './seo'
 import './style.css'
-
-createApp(App).use(router).mount('#app')
+const router=makeRouter()
+router.afterEach(to=>updateHead(to.path))
+const app=createApp(App).use(router)
+router.isReady().then(()=>app.mount('#app'))

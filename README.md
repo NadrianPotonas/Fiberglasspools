@@ -1,5 +1,5 @@
-# Vue 3 + Vite
+# Simplified website migration update
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Merge into your existing project. Keep existing public pool images and branding; overwrite the supplied crawler/redirect files. If you installed the previous migration update, remove its public/legacy-assets folder. Run npm install and npm run build.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+Read SEO-DEPLOYMENT.md before upload. REDIRECT-MAP.csv records redirects and removed URLs. No dist is supplied because you omitted your existing public images; rebuild after merging.

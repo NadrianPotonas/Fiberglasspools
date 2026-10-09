@@ -1,123 +1,85 @@
 <script setup>
-
+import { RouterLink, useRouter } from "vue-router"
+import { slug } from "../catalog"
 const props = defineProps({
   pool: Object,
 })
 
-const emit = defineEmits(["select"])
+const router = useRouter()
 
 const asset = (path) => {
   if (!path) return ''
   return `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 }
-
 </script>
 
 <template>
-
   <article
     class="pool-card"
-    @click="emit('select', pool)"
+    @click="router.push(`/pools/${slug(pool.name)}`)"
   >
-
+    <!-- IMAGE -->
     <div class="pool-image-wrap">
+      <div class="pool-photo">
+        <img
+          v-if="pool.installationImage"
+          :src="asset(pool.installationImage)"
+          :alt="`${pool.name} installation`"
+          class="pool-image"
+          loading="lazy"
+        />
 
-      <div class="pool-image-grid">
-
-        <!-- SHELL -->
-
-        <div class="pool-photo shell-photo">
-
-          <span class="pool-photo-label">
-            Shell
-          </span>
-
-          <img
-            v-if="pool.shellImage || pool.image"
-            :src="asset(pool.shellImage || pool.image)"
-            :alt="`${pool.name} shell`"
-            class="pool-image"
-            loading="lazy"
-          />
-
-          <div
-            v-else
-            class="pool-photo-placeholder"
-          >
-            Shell photo not set
-          </div>
-
+        <div
+          v-else
+          class="pool-photo-placeholder"
+        >
+          <span class="placeholder-icon">📷</span>
+          <span>Photo coming soon</span>
         </div>
-
-        <!-- INSTALLATION -->
-
-        <div class="pool-photo installation-photo">
-
-          <span class="pool-photo-label">
-            Installation
-          </span>
-
-          <img
-            v-if="pool.installationImage"
-            :src="asset(pool.installationImage)"
-            :alt="`${pool.name} installation`"
-            class="pool-image"
-            loading="lazy"
-          />
-
-          <div
-            v-else
-            class="pool-photo-placeholder"
-          >
-            <span class="placeholder-icon">📷</span>
-            <span>Installation photo coming soon</span>
-          </div>
-
-        </div>
-
       </div>
-
     </div>
 
+    <!-- INFO -->
     <div class="pool-info">
-
       <h3>
         {{ pool.name }}
       </h3>
 
-      <p>
-        {{ pool.size }}
-        <span>•</span>
-        {{ pool.depth }}
+      <p class="pool-details">
+        <span class="pool-detail">
+          <span class="detail-icon">↔</span>
+          {{ pool.size }}
+        </span>
+
+        <span class="pool-detail">
+          <span class="detail-icon">↕</span>
+          {{ pool.depth }}
+        </span>
       </p>
 
       <div class="pool-bottom">
-
         <strong>
-          {{ pool.price !== 'R0'
-            ? `Shell Price: ${pool.price}`
-            : 'Price on request'
+          {{
+            pool.price !== 'R0'
+              ? `Shell Price: ${pool.price}`
+              : 'Price on request'
           }}
         </strong>
 
-        <button
+        <RouterLink
           class="quote-button"
-          @click.stop="emit('select', pool)"
+          :to="`/pools/${slug(pool.name)}`"
+          @click.stop
         >
-          Request quote
+          Request a quote
           <span>→</span>
-        </button>
-
+        </RouterLink>
       </div>
-
     </div>
-
-  </article>
-
+</article>
 </template>
 
 <style scoped>
-
 .pool-card {
   @apply bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300;
 }
@@ -132,25 +94,22 @@ const asset = (path) => {
   padding: 12px;
 }
 
-.pool-image-grid {
-  @apply grid grid-cols-2 gap-3;
-}
-
 
 /* =========================================
-   INDIVIDUAL PHOTO FRAMES
+   IMAGE FRAME
 ========================================= */
 
 .pool-photo {
   @apply relative flex items-center justify-center overflow-hidden rounded-xl;
 
-  height: 205px;
+  width: 100%;
+  height: 300px;
   background: #ffffff;
 }
 
 
 /* =========================================
-   ALL IMAGES
+   IMAGE
 ========================================= */
 
 .pool-image {
@@ -176,16 +135,7 @@ const asset = (path) => {
 
 
 /* =========================================
-   PHOTO LABEL
-========================================= */
-
-.pool-photo-label {
-  @apply absolute top-3 left-3 z-10 rounded-full bg-slate-900/75 text-white px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider;
-}
-
-
-/* =========================================
-   PHOTO PLACEHOLDER
+   PLACEHOLDER
 ========================================= */
 
 .pool-photo-placeholder {
@@ -210,8 +160,17 @@ const asset = (path) => {
   @apply text-2xl font-black tracking-tight mb-1;
 }
 
-.pool-info p {
-  @apply text-sm text-slate-500;
+.pool-details {
+  @apply flex items-center  gap-5 mt-2 text-sm text-slate-500;
+}
+
+.pool-detail {
+  @apply flex items-center gap-2;
+}
+
+.detail-icon {
+  @apply flex items-center justify-center w-7 h-7 rounded-lg bg-sky-50 text-sky-600 font-bold;
+  font-size: 16px;
 }
 
 .pool-info p span {
@@ -241,30 +200,16 @@ const asset = (path) => {
 ========================================= */
 
 @media (max-width: 480px) {
-
   .pool-image-wrap {
     padding: 8px;
   }
 
-  .pool-image-grid {
-    gap: 8px;
-  }
-
   .pool-photo {
-    height: 190px;
+    height: 240px;
   }
 
   .pool-image {
     padding: 3px;
   }
-
-  .pool-photo-label {
-    top: 8px;
-    left: 8px;
-    font-size: 9px;
-    padding: 5px 7px;
-  }
-
 }
-
 </style>

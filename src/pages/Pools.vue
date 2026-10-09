@@ -2,7 +2,8 @@
   import { ref } from 'vue'
   import { RouterLink } from 'vue-router'
   import poolsData from '../data/pools.json'
-  import PoolDialog from '../components/PoolDialog.vue'
+
+  
   import PoolCard from '../components/PoolCard.vue'
 
   const categories = [
@@ -13,7 +14,7 @@
     { key: 'other', label: 'Spas & Other' },
   ]
   const active = ref('all')
-  const selected = ref(null)
+  
   const allPools = Object.entries(poolsData).flatMap(([category, pools]) => pools.map(pool => ({
     ...pool,
     category,
@@ -32,11 +33,11 @@
             v-for="pool in visiblePools()"
             :key="`${pool.category}-${pool.name}`"
             :pool="pool"
-            @select="selected = $event"
+            
           />
         </div>
         <div class="bottom-cta"><h2>Not sure which pool is right for you?</h2><p>Send us your details and we'll help you work out the best option for your space.</p><RouterLink to="/contact" class="primary-button">Contact us <span>→</span></RouterLink></div>
       </div>
     </section>
-    <PoolDialog v-if="selected" :pool="selected" @close="selected = null" />
+    
   </template>
