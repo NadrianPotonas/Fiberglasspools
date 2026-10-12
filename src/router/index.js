@@ -8,6 +8,8 @@ import LegacyPage from '../pages/LegacyPage.vue'
 import legacyPages from '../data/legacy-pages.json'
 import NotFound from '../pages/NotFound.vue'
 import { pools, slug } from '../catalog'
+import Equipment from '../pages/Equipment.vue'
+
 export function makeRouter(server = false) {
  return createRouter({
  history: server ? createMemoryHistory() : createWebHistory(import.meta.env.BASE_URL),
@@ -16,6 +18,7 @@ export function makeRouter(server = false) {
  { path: '/', component: Home }, { path: '/pools', component: Pools },
  { path: '/pools/:slug', component: PoolDetail, beforeEnter: to => pools.some(p=>slug(p.name)===to.params.slug) ? true : '/404' },
  ...legacyPages.filter(p=>!p.supplement).map(p=>({path:p.path,component:LegacyPage})), { path: '/why-fibreglass', component: WhyFibreglass },
+ { path: '/equipment', component: Equipment },
  { path: '/contact', component: Contact }, { path: '/404', component: NotFound },
  { path: '/:pathMatch(.*)*', component: NotFound }
  ] })

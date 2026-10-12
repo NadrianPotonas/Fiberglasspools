@@ -13,15 +13,11 @@ const logo = `${import.meta.env.BASE_URL}images/Logo.png`
         </RouterLink>
         <p>Quality fibreglass pools supplied across South Africa.</p>
       </div>
-      <div class="footer-links">
-        <RouterLink to="/pools">Pools</RouterLink>
-        <RouterLink to="/why-fibreglass">Why Fibreglass?</RouterLink>
-        <RouterLink to="/contact">Contact</RouterLink>
-        <a :href="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
-      </div>
       <div class="footer-contact">
+         <a :href="whatsapp" target="_blank" rel="noopener">WhatsApp</a>
         <a href="tel:+27767401410">+27 76 740 1410</a>
-        <a href="mailto:info@justfibreglasspools.co.za">info@justfibreglasspools.co.za</a>
+        <a href="tel:+27872659259">+27 87 265 9259</a>
+        <a href="mailto:info@justfibreglasspools.co.za">info@justdiyit.co.za</a>
       </div>
     </div>
     <div class="container copyright">© {{ new Date().getFullYear() }} Just Fibreglass Pools South Africa</div>

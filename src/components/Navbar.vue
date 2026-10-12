@@ -14,7 +14,8 @@ const poolLinks = [
   { label: 'Small pools', to: '/pools?category=small' },
   { label: 'Medium pools', to: '/pools?category=medium' },
   { label: 'Large pools', to: '/pools?category=large' },
-  { label: 'Spas & Other', to: '/pools?category=other' },
+  { label: 'Freestanding pools', to: '/pools?category=freestanding' },
+  { label: 'Garden Spas', to: '/pools?category=gardenspas' },
 ]
 
 const infoLinks = [
@@ -37,6 +38,17 @@ function toggleDropdown(name) {
   dropdown.value = dropdown.value === name ? null : name
 }
 
+function toggleMenu() {
+  open.value = !open.value
+  dropdown.value = null
+}
+
+function handleFocusOut(event) {
+  if (!event.currentTarget.contains(event.relatedTarget)) {
+    closeMenu()
+  }
+}
+
 watch(() => route.fullPath, closeMenu)
 </script>
 
@@ -44,9 +56,7 @@ watch(() => route.fullPath, closeMenu)
   <header
     class="site-header"
     @keydown.esc="closeMenu"
-    @focusout="event => {
-      if (!event.currentTarget.contains(event.relatedTarget)) closeMenu()
-    }"
+    @focusout="handleFocusOut"
   >
     <div class="container header-inner">
       <RouterLink to="/" class="brand" @click="closeMenu">
@@ -54,10 +64,15 @@ watch(() => route.fullPath, closeMenu)
       </RouterLink>
 
       <nav class="desktop-nav" aria-label="Main navigation">
-        <RouterLink to="/" exact-active-class="active" @click="closeMenu">
+        <RouterLink
+          to="/"
+          exact-active-class="active"
+          @click="closeMenu"
+        >
           Home
         </RouterLink>
 
+        <!-- POOLS DROPDOWN -->
         <div class="nav-dropdown">
           <button
             type="button"
@@ -91,6 +106,7 @@ watch(() => route.fullPath, closeMenu)
           </div>
         </div>
 
+        <!-- WHY FIBREGLASS DROPDOWN -->
         <div class="nav-dropdown">
           <button
             type="button"
@@ -132,7 +148,20 @@ watch(() => route.fullPath, closeMenu)
           </div>
         </div>
 
-        <RouterLink to="/contact" active-class="active" @click="closeMenu">
+        <!-- EQUIPMENT -->
+        <RouterLink
+          to="/equipment"
+          active-class="active"
+          @click="closeMenu"
+        >
+          Equipment
+        </RouterLink>
+
+        <RouterLink
+          to="/contact"
+          active-class="active"
+          @click="closeMenu"
+        >
           Contact
         </RouterLink>
       </nav>
@@ -153,20 +182,23 @@ watch(() => route.fullPath, closeMenu)
           :aria-label="open ? 'Close menu' : 'Open menu'"
           :aria-expanded="open"
           aria-controls="mobile-navigation"
-          @click="open = !open; dropdown = null"
+          @click="toggleMenu"
         >
           {{ open ? '×' : '☰' }}
         </button>
       </div>
     </div>
 
+    <!-- MOBILE NAVIGATION -->
     <nav
       v-if="open"
       id="mobile-navigation"
       class="mobile-nav"
       aria-label="Mobile navigation"
     >
-      <RouterLink to="/" @click="closeMenu">Home</RouterLink>
+      <RouterLink to="/" @click="closeMenu">
+        Home
+      </RouterLink>
 
       <button
         type="button"
@@ -228,7 +260,17 @@ watch(() => route.fullPath, closeMenu)
         </RouterLink>
       </div>
 
-      <RouterLink to="/contact" @click="closeMenu">Contact</RouterLink>
+      <RouterLink
+        to="/equipment"
+        active-class="active"
+        @click="closeMenu"
+      >
+        Equipment
+      </RouterLink>
+
+      <RouterLink to="/contact" @click="closeMenu">
+        Contact
+      </RouterLink>
 
       <a :href="whatsapp" target="_blank" rel="noopener">
         WhatsApp us
@@ -236,6 +278,7 @@ watch(() => route.fullPath, closeMenu)
     </nav>
   </header>
 
+  <!-- CLICK OUTSIDE TO CLOSE DESKTOP DROPDOWN -->
   <div
     v-if="dropdown && !open"
     class="dropdown-dismiss"
@@ -289,6 +332,8 @@ watch(() => route.fullPath, closeMenu)
   left: -16px;
   z-index: 2;
   width: 220px;
+  max-height: 70vh;
+  overflow-y: auto;
   padding: 8px;
   background: #fff;
   border: 1px solid #e2e8f0;
@@ -368,5 +413,12 @@ watch(() => route.fullPath, closeMenu)
   inset: 0;
   z-index: 59;
   background: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dropdown-arrow,
+  .desktop-nav .dropdown-panel a {
+    transition: none;
+  }
 }
 </style>

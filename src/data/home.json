@@ -1,0 +1,55 @@
+{
+  "special": {
+    "label": "October 2026 Special",
+    "title": "Summer Pool Sale",
+    "description": "Get ready for summer with a 3 m × 5 m fibreglass pool for R26 900.",
+    "price": "R26 900",
+    "image": "pools/Hudson.png",
+    "poolName": "Hudson",
+    "size": "3 m × 5 m",
+    "validUntil": "",
+    "buttonText": "Enquire about this special"
+  },
+  "deliveries": {
+    "title": "Upcoming nationwide delivery dates",
+    "description": "Our upcoming delivery schedule by region.",
+    "notice": "",
+    "items": [
+      {
+        "region": "KwaZulu-Natal",
+        "dates": "Daily Deliveries"
+      },
+      {
+        "region": "Gauteng, North West",
+        "dates": "19 - 21 October 2026"
+      },
+      {
+        "region": "Free State",
+        "dates": "9 - 11 November 2026"
+      },
+      {
+        "region": "Eastern Cape",
+        "dates": "Date to be confirmed"
+      }
+    ]
+  },
+  "reviews": {
+    "title": "What our customers say",
+    "items": [
+      {
+        "name": "Tim",
+        "location": "",
+        "rating": 5,
+        "text": "Absolutely love my new pool! The team did an amazing job super friendly professional and quick. They kept everything clean explained each step and made sure I was happy with the everything . The pool looks fantastic and has completely transformed my yard. Highly recommend them if you’re thinking about getting a pool!",
+        "placeholder": false
+      },
+      {
+        "name": "jhem henderson",
+        "location": "",
+        "rating": 5,
+        "text": "Excellent service!!!Very friendly.Highly recommended.",
+        "placeholder": false
+      }
+    ]
+  }
+}

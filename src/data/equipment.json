@@ -1,76 +1,42 @@
-{
-  "1": [
-    {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    }
-  ],
-  "2": [
-    {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    }
-  ],
-  "3": [    {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    }],
-  "4": [    {
-      "name": "Minnesota",
-      "size": "2.1m x 3.1m",
-      "depth": "1.3m",
-      "price": "R15 900",
-      "image": "https://picsum.photos/400/300?random=1"
-    },
-    {
-      "name": "Nile",
-      "size": "3.0m x 4.0m",
-      "depth": "1.1m",
-      "price": "R24 900",
-      "image": "https://picsum.photos/400/300?random=2"
-    }]
-}
+[
+  {
+    "id": "heat-pump",
+    "name": "Heat Pumps",
+    "image": "Heat pump.jpeg"
+  },
+  {
+    "id": "solar-heating",
+    "name": "Solar Heating",
+    "image": "solarheating.jpg"
+  },
+  {
+    "id": "handrail",
+    "name": "Handrails",
+    "image": "handrail large.jpg"
+  },
+  {
+    "id": "poolcover",
+    "name": "Pool Covers",
+    "image": "pole_cover_4.jpg"
+  },
+  {
+    "id": "filtercover",
+    "name": "Filter Covers",
+    "image": "Standard filter cover.jpeg"
+  },
+  {
+    "id": "sand-filter",
+    "name": "Pool filters",
+    "image": "sand-filter.jpg"
+  },
+  {
+    "id": "poolpump",
+    "name": "Pool Pumps",
+    "image": "pool-pump.jpg"
+  },
+  {
+    "id": "salt-chlorinator",
+    "name": "Salt Chlorinators",
+    "image": "salt-chlorinator.jpg"
+  }
+]

@@ -6,6 +6,10 @@ const pages = {
  '/pools': ['Fibreglass Pool Range & Prices | JUST DIY IT Pools', 'Compare our pool range by size, depth and listed price. Request a quote for delivery and installation.'],
  '/about': ['About JUST DIY IT Pools', 'Contact JUST DIY IT Pools for advice on choosing a fibreglass pool and available delivery and installation options.'],
  '/contact': ['Contact & Pool Quotes | JUST DIY IT Pools', 'Contact our team by phone, WhatsApp or email to discuss your pool and request a quote.'],
+ '/equipment': [
+  'Pool Equipment | JUST DIY IT Pools',
+  'Browse pool equipment and enquire about heating, handrails and other equipment for your pool.',
+],
  '/why-fibreglass': ['Why Choose Fibreglass Pools? | JUST DIY IT Pools', 'Learn about fibreglass swimming pools, installation and pool care.']
 }
 export function metadata(path) {

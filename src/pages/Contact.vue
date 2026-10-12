@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 
 const form = ref({
   name: '',
@@ -12,6 +15,45 @@ const form = ref({
 const sending = ref(false)
 const sent = ref(false)
 const error = ref('')
+const selectedEquipment = ref('')
+
+watch(
+  () => route.query.equipment,
+  (equipmentName) => {
+    selectedEquipment.value =
+      typeof equipmentName === 'string' ? equipmentName.trim() : ''
+
+    form.value.message = selectedEquipment.value
+      ? `I would like to enquire about ${selectedEquipment.value}.`
+      : ''
+
+    sent.value = false
+    error.value = ''
+  },
+  { immediate: true }
+)
+
+function sendWhatsApp() {
+  const message = [
+    'Hi, I would like to enquire about your pools or equipment.',
+    '',
+    ...(selectedEquipment.value
+      ? [`Equipment: ${selectedEquipment.value}`]
+      : []),
+    `Name: ${form.value.name || 'Not provided'}`,
+    `Email: ${form.value.email || 'Not provided'}`,
+    `Phone: ${form.value.phone || 'Not provided'}`,
+    `Location: ${form.value.location || 'Not provided'}`,
+    '',
+    form.value.message,
+  ].join('\n')
+
+  window.open(
+    `https://wa.me/27767401410?text=${encodeURIComponent(message)}`,
+    '_blank',
+    'noopener,noreferrer'
+  )
+}
 
 async function submitForm() {
   if (sending.value) return
@@ -20,7 +62,14 @@ async function submitForm() {
   sent.value = false
   error.value = ''
 
+  const subject = selectedEquipment.value
+    ? `Equipment enquiry - ${selectedEquipment.value}`
+    : `Pool enquiry from ${form.value.name}`
+
   const message = [
+    ...(selectedEquipment.value
+      ? [`Equipment: ${selectedEquipment.value}`]
+      : []),
     `Phone: ${form.value.phone || 'Not provided'}`,
     `Location: ${form.value.location || 'Not provided'}`,
     '',
@@ -39,7 +88,7 @@ async function submitForm() {
         body: JSON.stringify({
           name: form.value.name,
           email: form.value.email,
-          subject: `Pool enquiry from ${form.value.name}`,
+          subject,
           message,
         }),
       }
@@ -78,7 +127,7 @@ async function submitForm() {
       <h1>Contact us.</h1>
       <p>
         Have a question or ready to ask for a quote?
-        Send us an enquiry and we'll get back to you.
+        Send us an enquiry by email or WhatsApp.
       </p>
     </div>
   </section>
@@ -88,6 +137,7 @@ async function submitForm() {
       <div class="contact-details">
         <p class="eyebrow dark">Contact details</p>
         <h2>Let's talk pools.</h2>
+
         <p>
           Tell us what you're looking for and where you're located.
           We'll take it from there.
@@ -111,7 +161,7 @@ async function submitForm() {
             <a
               href="https://wa.me/27767401410"
               target="_blank"
-              rel="noopener"
+              rel="noopener noreferrer"
             >
               Chat with us on WhatsApp →
             </a>
@@ -121,7 +171,12 @@ async function submitForm() {
 
       <div class="contact-form-card">
         <h2>Send an enquiry</h2>
-        <p>Complete the form and send your message directly to our team.</p>
+        <p>Complete your details and choose email or WhatsApp.</p>
+
+        <div v-if="selectedEquipment" class="selected-equipment">
+          <span>Equipment enquiry</span>
+          <strong>{{ selectedEquipment }}</strong>
+        </div>
 
         <form
           class="contact-form"
@@ -189,22 +244,63 @@ async function submitForm() {
             ></textarea>
           </label>
 
-          <button
-            class="send-button full"
-            type="submit"
-            :disabled="sending"
-          >
-            <span v-if="sending" class="spinner" aria-hidden="true"></span>
-            {{ sending ? 'Sending…' : 'Send enquiry' }}
-            <span v-if="!sending" aria-hidden="true">→</span>
-          </button>
+          <div class="contact-actions full">
+            <button
+              class="enquiry-button email-action"
+              type="submit"
+              :disabled="sending"
+            >
+              <span
+                v-if="sending"
+                class="spinner"
+                aria-hidden="true"
+              ></span>
+
+              <span>{{ sending ? 'Sending…' : 'Send email' }}</span>
+            </button>
+
+            <button
+              class="enquiry-button whatsapp-action"
+              type="button"
+              :disabled="sending"
+              @click="sendWhatsApp"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5Z" />
+                <path d="M9 8c0 3.9 3.1 7 7 7l1-2-3-1-1 1-2-2 1-1-1-3-2 1Z" />
+              </svg>
+
+              <span>WhatsApp</span>
+            </button>
+          </div>
+
+          <p class="whatsapp-note full">
+            WhatsApp opens with your enquiry ready. Press Send there
+            to send your message.
+          </p>
         </form>
 
-        <p v-if="sent" class="status-message success-message" role="status">
+        <p
+          v-if="sent"
+          class="status-message success-message"
+          role="status"
+        >
           Your enquiry has been submitted. Thank you for contacting us.
         </p>
 
-        <p v-if="error" class="status-message error-message" role="alert">
+        <p
+          v-if="error"
+          class="status-message error-message"
+          role="alert"
+        >
           {{ error }}
         </p>
       </div>
@@ -213,44 +309,116 @@ async function submitForm() {
 </template>
 
 <style scoped>
-.send-button {
+.contact-form-card,
+.contact-form,
+.contact-form > label {
+  min-width: 0;
+}
+
+.contact-form input,
+.contact-form textarea {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.selected-equipment {
+  display: grid;
+  gap: 6px;
+  margin: 20px 0;
+  padding: 14px 16px;
+  background: #f0f9ff;
+  border: 1px solid #bae6fd;
+  border-radius: 12px;
+}
+
+.selected-equipment span {
+  color: #0369a1;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.selected-equipment strong {
+  color: #0f172a;
+  font-size: 16px;
+  overflow-wrap: anywhere;
+}
+
+.contact-actions {
   display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+}
+
+.contact-actions .enquiry-button {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  width: 100%;
-  height: 50px;
-  padding: 16px 24px;
+  gap: 8px;
+  box-sizing: border-box;
+  width: auto;
+  max-width: 100%;
+  height: 44px;
+  padding: 10px 14px;
   border: 0;
-  border-radius: 14px;
-  background: #0284c7;
+  border-radius: 10px;
   color: #fff;
-  font: inherit;
-  font-weight: 800;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
   cursor: pointer;
-  box-shadow: 0 6px 18px rgb(2 132 199 / 20%);
-  transition: background 0.2s, box-shadow 0.2s;
+  transition: background 0.2s;
 }
 
-.send-button:hover:not(:disabled) {
+.email-action {
+  background: #0284c7;
+}
+
+.email-action:hover:not(:disabled) {
   background: #0369a1;
-  box-shadow: 0 8px 24px rgb(2 132 199 / 28%);
 }
 
-.send-button:focus-visible {
+.whatsapp-action {
+  background: #15803d;
+}
+
+.whatsapp-action:hover:not(:disabled) {
+  background: #166534;
+}
+
+.enquiry-button svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+.enquiry-button:focus-visible {
   outline: 3px solid #38bdf8;
   outline-offset: 4px;
 }
 
-.send-button:disabled {
+.enquiry-button:disabled {
   opacity: 0.65;
   cursor: wait;
-  box-shadow: none;
+}
+
+.whatsapp-note {
+  margin: 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
 .spinner {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  box-sizing: border-box;
   border: 2px solid rgb(255 255 255 / 35%);
   border-top-color: #fff;
   border-radius: 50%;
@@ -259,11 +427,12 @@ async function submitForm() {
 
 .status-message {
   margin-top: 20px;
-  padding: 14px 18px;
+  padding: 14px 16px;
   border: 1px solid;
   border-radius: 12px;
   font-size: 14px;
   line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
 .success-message {
@@ -279,7 +448,21 @@ async function submitForm() {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .contact-actions .enquiry-button {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -287,7 +470,7 @@ async function submitForm() {
     animation: none;
   }
 
-  .send-button {
+  .enquiry-button {
     transition: none;
   }
 }

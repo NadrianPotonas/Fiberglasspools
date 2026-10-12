@@ -17,6 +17,14 @@
       "installationImage": "pools/colorado.png"
     },
     {
+      "name": "Hot Tub",
+      "size": "2.45m x 2.45m",
+      "depth": "1.2m",
+      "price": "R15 900.00",
+      "shellImage": "pools/Hottub-shell.webp",
+      "installationImage": "pools/hottub.webp"
+    },
+    {
       "name": "Caledon",
       "size": "3.0m x 3.6m",
       "depth": "600mm",
@@ -25,12 +33,36 @@
       "installationImage": "pools/caledon.png"
     },
     {
-      "name": "Savannah Spa",
-      "size": "2.4m x 2.4m",
-      "depth": "900mm",
-      "price": "R25 960.00",
-      "shellImage": "pools/Savanahspa-shell.webp",
-      "installationImage": "pools/Savanahspa-shell.webp"
+      "name": "Seychelles",
+      "size": "3.0m x 3.6m",
+      "depth": "600mm",
+      "price": "R17 900.00",
+      "shellImage": "pools/Seychelles-shell.jpg",
+      "installationImage": "pools/Seychelles-shell.jpg"
+    },
+    {
+      "name": "Splashspa",
+      "size": "3.0m x 3.6m",
+      "depth": "600mm",
+      "price": "R17 900.00",
+      "shellImage": "pools/Splashspa-shell.jpeg",
+      "installationImage": "pools/Splashspa-shell.jpeg"
+    },
+    {
+      "name": "Avon",
+      "size": "2.8m x 2.8m",
+      "depth": "1.2m",
+      "price": "R19 300.00",
+      "shellImage": "pools/Avon-shell.webp",
+      "installationImage": "pools/avon.png"
+    },
+    {
+      "name": "Manila",
+      "size": "2.3m x 3.5m",
+      "depth": "1.3m",
+      "price": "R18 800.00",
+      "shellImage": "pools/Manila-shell.webp",
+      "installationImage": "pools/Manila.webp"
     }
   ],
   "medium": [
@@ -51,22 +83,6 @@
       "installationImage": "pools/Nile.webp"
     },
     {
-      "name": "Avon",
-      "size": "2.8m x 2.8m",
-      "depth": "1.2m",
-      "price": "R19 300.00",
-      "shellImage": "pools/Avon-shell.webp",
-      "installationImage": "pools/avon.png"
-    },
-    {
-      "name": "Manila",
-      "size": "2.3m x 3.5m",
-      "depth": "1.3m",
-      "price": "R18 800.00",
-      "shellImage": "pools/Manila-shell.webp",
-      "installationImage": "pools/Manila.webp"
-    },
-    {
       "name": "Narrow",
       "size": "2.2m x 5.2m",
       "depth": "1.0m - 1.5m",
@@ -75,12 +91,20 @@
       "installationImage": "pools/narrow.webp"
     },
     {
-      "name": "4 Seater Spa",
-      "size": "1.5m x 1.5m",
-      "depth": "800mm",
-      "price": "R0",
-      "shellImage": "pools/4seaterspa-shell.webp",
-      "installationImage": "pools/4seaterspa-shell.webp"
+      "name": "Thames",
+      "size": "3.0m x 4.0m",
+      "depth": "1.0m - 1.3m",
+      "price": "R27 800.00",
+      "shellImage": "pools/Thames-shell.webp",
+      "installationImage": "pools/Thames.webp"
+    },
+    {
+      "name": "Mississippi",
+      "size": "3.0m x 5.0m",
+      "depth": "1.0m - 1.5m",
+      "price": "R28 800.00",
+      "shellImage": "pools/Mississippi-shell.webp",
+      "installationImage": "pools/Mississippi.webp"
     }
   ],
   "large": [
@@ -133,14 +157,6 @@
       "installationImage": "pools/Mira.webp"
     },
     {
-      "name": "Mississippi",
-      "size": "3.0m x 5.0m",
-      "depth": "1.0m - 1.5m",
-      "price": "R28 800.00",
-      "shellImage": "pools/Mississippi-shell.webp",
-      "installationImage": "pools/Mississippi.webp"
-    },
-    {
       "name": "Reno",
       "size": "3.0m x 6.5m",
       "depth": "1.0m - 1.5m",
@@ -149,12 +165,12 @@
       "installationImage": "pools/Reno.png"
     },
     {
-      "name": "Thames",
-      "size": "3.0m x 4.0m",
-      "depth": "1.0m - 1.3m",
-      "price": "R27 800.00",
-      "shellImage": "pools/Thames-shell.webp",
-      "installationImage": "pools/Thames.webp"
+      "name": "In Paradise",
+      "size": "3.8m x 7.0m",
+      "depth": "1.0m - 1.6m",
+      "price": "R39 400.00",
+      "shellImage": "pools/Inparadise-shell.webp",
+      "installationImage": "pools/Inparadise.webp"
     },
     {
       "name": "Volta",
@@ -165,23 +181,8 @@
       "installationImage": "pools/Volta.webp"
     }
   ],
-  "other": [
-    {
-      "name": "In Paradise",
-      "size": "3.8m x 7.0m",
-      "depth": "1.0m - 1.6m",
-      "price": "R39 400.00",
-      "shellImage": "pools/Inparadise-shell.webp",
-      "installationImage": "pools/Inparadise.webp"
-    },
-    {
-      "name": "Hot Tub",
-      "size": "2.45m x 2.45m",
-      "depth": "1.2m",
-      "price": "R15 900.00",
-      "shellImage": "pools/Hottub-shell.webp",
-      "installationImage": "pools/hottub.webp"
-    },
+  "freestanding": [
+
     {
       "name": "Freestanding Minnesota",
       "size": "2m x 3m",
@@ -197,6 +198,55 @@
       "price": "R17 200.00",
       "shellImage": "pools/Seychelles above ground-shell.webp",
       "installationImage": "pools/Seychelles above ground.webp"
+    },
+    {
+      "name": "Freestanding Colorado",
+      "size": "2.45m x 2.45m",
+      "depth": "850mm",
+      "price": "R14 900.00",
+      "shellImage": "pools/Colorado-shell.webp",
+      "installationImage": "pools/Colorado-shell.webp"
+    },
+        {
+      "name": "Freestanding Hot Tub",
+      "size": "2.45m x 2.45m",
+      "depth": "1.2m",
+      "price": "R15 900.00",
+      "shellImage": "pools/Hottub-shell.webp",
+      "installationImage": "pools/Hottub-shell.webp"
+    },
+        {
+      "name": "Freestanding Nile",
+      "size": "3.0m x 4.0m",
+      "depth": "1.0m",
+      "price": "R26 900.00",
+      "shellImage": "pools/Nile-shell.webp",
+      "installationImage": "pools/Nile-shell.webp"
+    },
+        {
+      "name": "Freestanding Manila",
+      "size": "2.3m x 3.5m",
+      "depth": "1.3m",
+      "price": "R18 800.00",
+      "shellImage": "pools/Manila-shell.webp",
+      "installationImage": "pools/Manila-shell.webp"
+    }
+  ],"gardenspas": [
+        {
+      "name": "Savannah Spa",
+      "size": "2.4m x 2.4m",
+      "depth": "900mm",
+      "price": "R25 960.00",
+      "shellImage": "pools/Savanahspa-shell.webp",
+      "installationImage": "pools/Savanahspa-shell.webp"
+    },
+    {
+      "name": "4 Seater Spa",
+      "size": "1.5m x 1.5m",
+      "depth": "800mm",
+      "price": "R0",
+      "shellImage": "pools/4seaterspa-shell.webp",
+      "installationImage": "pools/4seaterspa-shell.webp"
     }
   ]
 }
