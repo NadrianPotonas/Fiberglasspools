@@ -20,7 +20,7 @@
         "dates": "Daily Deliveries"
       },
       {
-        "region": "Gauteng, North West",
+        "region": "Gauteng, North West & Mpumulanga",
         "dates": "19 - 21 October 2026"
       },
       {
@@ -48,6 +48,20 @@
         "location": "",
         "rating": 5,
         "text": "Excellent service!!!Very friendly.Highly recommended.",
+        "placeholder": false
+      },
+      {
+        "name": "Chris",
+        "location": "Pennington",
+        "rating": 5,
+        "text": "Thanks again to you and Wayne - this is truly great service. And thank you for understanding my situation. Normally I would have been happy to wait. So I really appreciate it. Wayne struggled a bit as it was not the pump. After a lot of searching he found a loose connection in the db board. I appreciate his commitment to the task. Outstanding. Thanks again Werner! I am off to sweep the pool by moonlight! 👍😎🤠",
+        "placeholder": false
+      },
+      {
+        "name": "Jan",
+        "location": "Bloemfontein",
+        "rating": 5,
+        "text": "Hi Werner baaaaaaaaaaie dankie het die helfte van die mense in die straat gekry om te help😂As hy klaar is sal ek n foto stuur🥇",
         "placeholder": false
       }
     ]

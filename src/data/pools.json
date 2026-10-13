@@ -34,23 +34,23 @@
     },
     {
       "name": "Seychelles",
-      "size": "3.0m x 3.6m",
-      "depth": "600mm",
-      "price": "R17 900.00",
-      "shellImage": "pools/Seychelles-shell.jpg",
-      "installationImage": "pools/Seychelles-shell.jpg"
+      "size": "1.7m x 2.7m",
+      "depth": "1.0m",
+      "price": "R14 500.00",
+      "shellImage": "pools/Seychelles2.png",
+      "installationImage": "pools/Seychelles2.png"
     },
     {
       "name": "Splashspa",
-      "size": "3.0m x 3.6m",
-      "depth": "600mm",
-      "price": "R17 900.00",
+      "size": "2.2m x 3.0m",
+      "depth": "1.0m",
+      "price": "R19 800.00",
       "shellImage": "pools/Splashspa-shell.jpeg",
       "installationImage": "pools/Splashspa-shell.jpeg"
     },
     {
       "name": "Avon",
-      "size": "2.8m x 2.8m",
+      "size": "3.0m x 3.0m",
       "depth": "1.2m",
       "price": "R19 300.00",
       "shellImage": "pools/Avon-shell.webp",
@@ -84,7 +84,7 @@
     },
     {
       "name": "Narrow",
-      "size": "2.2m x 5.2m",
+      "size": "2.2m x 5.4m",
       "depth": "1.0m - 1.5m",
       "price": "R27 800.00",
       "shellImage": "pools/narrow-shell.webp",
@@ -105,6 +105,14 @@
       "price": "R28 800.00",
       "shellImage": "pools/Mississippi-shell.webp",
       "installationImage": "pools/Mississippi.webp"
+    },
+    {
+      "name": "Umfolozi",
+      "size": "3.0m x 6.0m",
+      "depth": "1.0m - 1.5m",
+      "price": "R31 900.00",
+      "shellImage": "pools/Umfolozi2.jpeg",
+      "installationImage": "pools/Umfolozi2.jpeg"
     }
   ],
   "large": [
@@ -211,7 +219,7 @@
       "name": "Freestanding Hot Tub",
       "size": "2.45m x 2.45m",
       "depth": "1.2m",
-      "price": "R15 900.00",
+      "price": "R17 900.00",
       "shellImage": "pools/Hottub-shell.webp",
       "installationImage": "pools/Hottub-shell.webp"
     },
@@ -227,7 +235,7 @@
       "name": "Freestanding Manila",
       "size": "2.3m x 3.5m",
       "depth": "1.3m",
-      "price": "R18 800.00",
+      "price": "R21 600.00",
       "shellImage": "pools/Manila-shell.webp",
       "installationImage": "pools/Manila-shell.webp"
     }
@@ -241,10 +249,10 @@
       "installationImage": "pools/Savanahspa-shell.webp"
     },
     {
-      "name": "4 Seater Spa",
+      "name": "Spa 4 Seater",
       "size": "1.5m x 1.5m",
       "depth": "800mm",
-      "price": "R0",
+      "price": "R16 800.00",
       "shellImage": "pools/4seaterspa-shell.webp",
       "installationImage": "pools/4seaterspa-shell.webp"
     }

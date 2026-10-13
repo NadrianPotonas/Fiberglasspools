@@ -60,7 +60,7 @@ const rating = (value) =>
         <p v-if="homeData.special.price" class="special-offer-price">
           {{ homeData.special.price }}
         </p>
-
+                  <b>Shell only (excluding delivery)</b>
         <p v-if="homeData.special.validUntil" class="special-offer-validity">
           Valid until: {{ homeData.special.validUntil }}
         </p>
