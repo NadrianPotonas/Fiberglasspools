@@ -40,10 +40,10 @@ function sendWhatsApp() {
     ...(selectedEquipment.value
       ? [`Equipment: ${selectedEquipment.value}`]
       : []),
-    `Name: ${form.value.name || 'Not provided'}`,
-    `Email: ${form.value.email || 'Not provided'}`,
-    `Phone: ${form.value.phone || 'Not provided'}`,
-    `Location: ${form.value.location || 'Not provided'}`,
+    `Name: ${form.value.name || ''}`,
+    `Email: ${form.value.email || ''}`,
+    `Phone: ${form.value.phone || ''}`,
+    `Location: ${form.value.location || ''}`,
     '',
     form.value.message,
   ].join('\n')
@@ -103,11 +103,11 @@ async function submitForm() {
     sent.value = true
 
     form.value = {
-      name: '',
-      email: '',
-      phone: '',
-      location: '',
-      message: '',
+      name: ' ',
+      email: ' ',
+      phone: ' ',
+      location: ' ',
+      message: ' ',
     }
   } catch (err) {
     error.value =
@@ -151,8 +151,8 @@ async function submitForm() {
 
           <div>
             <span>Email</span>
-            <a href="mailto:info@justfibreglasspools.co.za">
-              info@justfibreglasspools.co.za
+            <a href="mailto:info@justdiyit.co.za">
+              info@justdiyit.co.za
             </a>
           </div>
 

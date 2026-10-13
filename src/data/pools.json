@@ -75,6 +75,14 @@
       "installationImage": "pools/Hudson.png"
     },
     {
+      "name": "Tinto",
+      "size": "3.0m x 4.0m",
+      "depth": "1.0m - 1.4m",
+      "price": "R23 900.00",
+      "shellImage": "pools/Tinto.jpeg",
+      "installationImage": "pools/Tinto.jpeg"
+    },
+    {
       "name": "Nile",
       "size": "3.0m x 4.0m",
       "depth": "1.0m",
